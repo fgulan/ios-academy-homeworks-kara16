@@ -147,8 +147,6 @@
                     </view>
                     <connections>
                         <outlet property="checkbox" destination="gTh-LQ-QKo" id="GxQ-Go-1Vm"/>
-                        <outlet property="passwordTextbox" destination="IXj-oE-ic1" id="xht-CE-Kzk"/>
-                        <outlet property="usernameTextbox" destination="m17-2I-dBM" id="fgv-KC-wch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3j-cn-jdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
