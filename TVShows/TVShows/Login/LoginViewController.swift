@@ -9,20 +9,21 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    private var tapCount:Int = 0
-    @IBOutlet weak var IBOutlet: UILabel!
+    private var checked = false
+    
+    @IBOutlet weak var checkbox: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLabelText(text: "Number of clicks: " + String(tapCount))
-    }
-
-    @IBAction func IBAction(_ sender: Any) {
-        tapCount += 1
-        setLabelText(text: "Number of clicks: " + String(tapCount))
     }
     
-    private func setLabelText(text: String) {
-        IBOutlet.text = text
+    @IBAction func checkBoxChanged(_ sender: Any) {
+        checked = !checked
+        
+        if checked {
+            checkbox.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
+        }else {
+            checkbox.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
+        }
     }
 }
