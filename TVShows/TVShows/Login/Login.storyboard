@@ -35,11 +35,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-ec-CqJ">
                                 <rect key="frame" x="0.0" y="221" width="414" height="515.33333333333337"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IXj-oE-ic1">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="IXj-oE-ic1">
                                         <rect key="frame" x="4" y="82" width="406" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBg-NV-gYx">
                                         <rect key="frame" x="8" y="183" width="398" height="36"/>
@@ -79,7 +79,7 @@
                                             <action selector="checkBoxChanged:" destination="oYv-3T-I7Q" eventType="touchUpInside" id="ZeT-GZ-yyE"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m17-2I-dBM">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="m17-2I-dBM">
                                         <rect key="frame" x="4" y="8" width="406" height="41"/>
                                         <accessibility key="accessibilityConfiguration" hint="Placeholder">
                                             <accessibilityTraits key="traits" none="YES"/>
@@ -154,6 +154,8 @@
                     <navigationItem key="navigationItem" id="4iA-Jc-omh"/>
                     <connections>
                         <outlet property="checkbox" destination="gTh-LQ-QKo" id="GxQ-Go-1Vm"/>
+                        <outlet property="eMailText" destination="m17-2I-dBM" id="3bQ-rX-mBK"/>
+                        <outlet property="passwordText" destination="IXj-oE-ic1" id="SmM-0q-l2I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3j-cn-jdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
