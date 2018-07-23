@@ -7,14 +7,117 @@
 //
 
 import UIKit
+import SVProgressHUD
+import Alamofire
+import CodableAlamofire
 
 class LoginViewController: UIViewController {
     private var checked = false
+    
+    @IBOutlet weak var eMailText: UITextField!
+    
+    @IBOutlet weak var passwordText: UITextField!
     
     @IBOutlet weak var checkbox: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func createAccountPushHome(_ sender: Any) {
+        if(isAnyFieldEmpty(userEMail: eMailText.text!, password: passwordText.text!)) {
+            showAlert(alertMessage: "All fields required!")
+            return
+        }
+        
+        registerUserWith(email: eMailText.text!, password: passwordText.text!)
+    }
+    
+    @IBAction func logInPushHome(_ sender: Any) {
+        
+        if(isAnyFieldEmpty(userEMail: eMailText.text!, password: passwordText.text!)) {
+            showAlert(alertMessage: "All fields required!")
+            return
+        }
+        
+        loginUserWith(email: eMailText.text!, password: passwordText.text!)
+    }
+    
+    private func isAnyFieldEmpty(userEMail: String, password: String) -> Bool{
+       
+        return userEMail.isEmpty || password.isEmpty
+    }
+    
+    private func showAlert(alertMessage: String) {
+        let alertController = UIAlertController(title: "Alert", message:
+            alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func pushHome() {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let viewControllerD =
+            storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+        navigationController?.pushViewController(viewControllerD, animated:
+            true)
+    }
+    
+    private func loginUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        Alamofire
+            .request("https://api.infinum.academy/api/users/sessions",
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
+            .validate()
+            .responseJSON{
+        response in
+         SVProgressHUD.dismiss()
+                
+        switch response.result {
+        case .success:
+            self.pushHome()
+        case .failure(let error):
+            print("LOGIN API failure: \(error)")
+        }
+        }
+    }
+    
+    private func registerUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire
+            .request("https://api.infinum.academy/api/users",
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
+                (response: DataResponse<User>) in
+                
+                SVProgressHUD.dismiss()
+                
+                switch response.result {
+                case .success:
+                    self.loginUserWith(email: email, password: password)
+                case .failure(let error):
+                    print("REGISTER API failure: \(error)")
+                }
+        }
+        
+        
     }
     
     @IBAction func checkBoxChanged(_ sender: Any) {
