@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="438-1b-xvR">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
+                                <rect key="frame" x="0.0" y="42" width="414" height="171"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-s9-ee3">
                                         <rect key="frame" x="169.66666666666666" y="70.666666666666671" width="75" height="80.000000000000014"/>
@@ -29,11 +29,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="fDM-s9-ee3" firstAttribute="centerX" secondItem="438-1b-xvR" secondAttribute="centerX" id="U5D-Ds-OLU"/>
-                                    <constraint firstItem="fDM-s9-ee3" firstAttribute="centerY" secondItem="438-1b-xvR" secondAttribute="centerY" constant="3.8333333333333144" id="da7-Q8-S6q"/>
+                                    <constraint firstItem="fDM-s9-ee3" firstAttribute="centerY" secondItem="438-1b-xvR" secondAttribute="centerY" constant="24.833333333333314" id="da7-Q8-S6q"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-ec-CqJ">
-                                <rect key="frame" x="0.0" y="221" width="414" height="515.33333333333337"/>
+                                <rect key="frame" x="0.0" y="263.00000000000006" width="414" height="515.33333333333348"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IXj-oE-ic1">
                                         <rect key="frame" x="4" y="82" width="406" height="36"/>
@@ -134,13 +134,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="438-1b-xvR" firstAttribute="top" secondItem="iMY-al-cwT" secondAttribute="top" constant="22" id="1vO-h4-In5"/>
                             <constraint firstItem="438-1b-xvR" firstAttribute="trailing" secondItem="iMY-al-cwT" secondAttribute="trailing" id="2az-gK-M3A"/>
                             <constraint firstItem="Pir-ec-CqJ" firstAttribute="leading" secondItem="iMY-al-cwT" secondAttribute="leading" id="5IU-K3-4l2"/>
-                            <constraint firstItem="Pir-ec-CqJ" firstAttribute="top" secondItem="438-1b-xvR" secondAttribute="bottom" constant="7.6666666666666856" id="St1-h0-7tG"/>
+                            <constraint firstItem="Pir-ec-CqJ" firstAttribute="top" secondItem="438-1b-xvR" secondAttribute="bottom" constant="49.666666666666686" id="St1-h0-7tG"/>
                             <constraint firstItem="Pir-ec-CqJ" firstAttribute="height" secondItem="Od6-To-NuU" secondAttribute="height" multiplier="0.7" id="ZN4-qC-dul"/>
-                            <constraint firstItem="438-1b-xvR" firstAttribute="top" secondItem="Od6-To-NuU" secondAttribute="top" id="aIY-5X-T7v"/>
                             <constraint firstItem="Pir-ec-CqJ" firstAttribute="trailing" secondItem="iMY-al-cwT" secondAttribute="trailing" id="ef6-bm-X8r"/>
-                            <constraint firstItem="438-1b-xvR" firstAttribute="height" secondItem="Od6-To-NuU" secondAttribute="height" multiplier="0.3" constant="-7.7999999999999829" id="fzZ-sd-F2x"/>
+                            <constraint firstItem="438-1b-xvR" firstAttribute="height" secondItem="Od6-To-NuU" secondAttribute="height" multiplier="0.3" constant="-49.799999999999983" id="fzZ-sd-F2x"/>
                             <constraint firstItem="438-1b-xvR" firstAttribute="leading" secondItem="iMY-al-cwT" secondAttribute="leading" id="now-Jc-4cx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iMY-al-cwT"/>
