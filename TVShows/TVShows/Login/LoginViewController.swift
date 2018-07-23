@@ -71,15 +71,15 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseJSON{
+            .responseJSON{ [weak self]
         response in
          SVProgressHUD.dismiss()
                 
         switch response.result {
         case .success:
-            self.pushHome()
+            self?.pushHome()
         case .failure:
-            self.showAlert(alertMessage: "Invalid username or password.")
+            self?.showAlert(alertMessage: "Invalid username or password.")
         }
         }
     }
@@ -98,16 +98,16 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self]
                 (response: DataResponse<User>) in
                 
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
                 case .success:
-                    self.loginUserWith(email: email, password: password)
+                    self?.loginUserWith(email: email, password: password)
                 case .failure:
-                    self.showAlert(alertMessage: "Cannot register user with the given data.")
+                    self?.showAlert(alertMessage: "Cannot register user with the given data.")
                 }
         }
         
