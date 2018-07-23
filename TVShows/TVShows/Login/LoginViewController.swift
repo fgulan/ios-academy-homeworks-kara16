@@ -25,27 +25,21 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccountPushHome(_ sender: Any) {
-        if(isAnyFieldEmpty(userEMail: eMailField.text!, password: passwordField.text!)) {
+        if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
+           registerUserWith(email: eMailField.text!, password: passwordField.text!)
+        }else{
             showAlert(alertMessage: "All fields required!")
-            return
         }
-        
-        registerUserWith(email: eMailField.text!, password: passwordField.text!)
     }
     
     @IBAction func logInPushHome(_ sender: Any) {
         
-        if(isAnyFieldEmpty(userEMail: eMailField.text!, password: passwordField.text!)) {
+        if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
+            loginUserWith(email: eMailField.text!, password: passwordField.text!)
+        }else{
             showAlert(alertMessage: "All fields required!")
-            return
         }
-        
-        loginUserWith(email: eMailField.text!, password: passwordField.text!)
-    }
-    
-    private func isAnyFieldEmpty(userEMail: String, password: String) -> Bool{
        
-        return userEMail.isEmpty || password.isEmpty
     }
     
     private func showAlert(alertMessage: String) {
@@ -53,7 +47,7 @@ class LoginViewController: UIViewController {
             alertMessage, preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
         
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func pushHome() {
@@ -84,8 +78,8 @@ class LoginViewController: UIViewController {
         switch response.result {
         case .success:
             self.pushHome()
-        case .failure(let error):
-            print("LOGIN API failure: \(error)")
+        case .failure:
+            self.showAlert(alertMessage: "Invalid username or password.")
         }
         }
     }
@@ -112,8 +106,8 @@ class LoginViewController: UIViewController {
                 switch response.result {
                 case .success:
                     self.loginUserWith(email: email, password: password)
-                case .failure(let error):
-                    print("REGISTER API failure: \(error)")
+                case .failure:
+                    self.showAlert(alertMessage: "Cannot register user with the given data.")
                 }
         }
         
