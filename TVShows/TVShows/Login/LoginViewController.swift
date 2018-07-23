@@ -14,33 +14,33 @@ import CodableAlamofire
 class LoginViewController: UIViewController {
     private var checked = false
     
-    @IBOutlet weak var eMailText: UITextField!
+    @IBOutlet weak var eMailField: UITextField!
     
-    @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
-    @IBOutlet weak var checkbox: UIButton!
+    @IBOutlet weak var checkboxButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func createAccountPushHome(_ sender: Any) {
-        if(isAnyFieldEmpty(userEMail: eMailText.text!, password: passwordText.text!)) {
+        if(isAnyFieldEmpty(userEMail: eMailField.text!, password: passwordField.text!)) {
             showAlert(alertMessage: "All fields required!")
             return
         }
         
-        registerUserWith(email: eMailText.text!, password: passwordText.text!)
+        registerUserWith(email: eMailField.text!, password: passwordField.text!)
     }
     
     @IBAction func logInPushHome(_ sender: Any) {
         
-        if(isAnyFieldEmpty(userEMail: eMailText.text!, password: passwordText.text!)) {
+        if(isAnyFieldEmpty(userEMail: eMailField.text!, password: passwordField.text!)) {
             showAlert(alertMessage: "All fields required!")
             return
         }
         
-        loginUserWith(email: eMailText.text!, password: passwordText.text!)
+        loginUserWith(email: eMailField.text!, password: passwordField.text!)
     }
     
     private func isAnyFieldEmpty(userEMail: String, password: String) -> Bool{
@@ -124,9 +124,9 @@ class LoginViewController: UIViewController {
         checked = !checked
         
         if checked {
-            checkbox.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
+            checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
         }else {
-            checkbox.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
+            checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
         }
     }
 }
