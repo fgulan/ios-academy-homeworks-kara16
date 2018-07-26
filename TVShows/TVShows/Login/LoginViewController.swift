@@ -13,6 +13,8 @@ import CodableAlamofire
 
 class LoginViewController: UIViewController {
     private var checked = false
+    private var user: User?
+    private var loginUser: LoginData?
     
     @IBOutlet weak var eMailField: UITextField!
     
@@ -44,8 +46,8 @@ class LoginViewController: UIViewController {
     
     private func showAlert(alertMessage: String) {
         let alertController = UIAlertController(title: "Alert", message:
-            alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            alertMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default,handler: nil))
         
         present(alertController, animated: true, completion: nil)
     }
@@ -53,9 +55,9 @@ class LoginViewController: UIViewController {
     private func pushHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let viewControllerD =
-            storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        navigationController?.pushViewController(viewControllerD, animated:
-            true)
+            storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        viewControllerD.loginUser = self.loginUser
+        navigationController?.setViewControllers([viewControllerD], animated: true)
     }
     
     private func loginUserWith(email: String, password: String) {
@@ -65,6 +67,7 @@ class LoginViewController: UIViewController {
             "email": email,
             "password": password
         ]
+        
         Alamofire
             .request("https://api.infinum.academy/api/users/sessions",
                      method: .post,
@@ -76,8 +79,25 @@ class LoginViewController: UIViewController {
          SVProgressHUD.dismiss()
                 
         switch response.result {
-        case .success:
-            self?.pushHome()
+        case .success(let response):
+            guard let jsonDict = response as? Dictionary<String, Any> else {
+                return
+            }
+            
+            guard
+                let dataDict = jsonDict["data"],
+                let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict) else {
+                    return
+            }
+            
+            do {
+                let loginUser: LoginData = try JSONDecoder().decode(LoginData.self, from: dataBinary)
+                self?.loginUser = loginUser
+                self?.pushHome()
+            } catch let error {
+                print("Serialization error: \(error)")
+            }
+            
         case .failure:
             self?.showAlert(alertMessage: "Invalid username or password.")
         }
@@ -98,14 +118,30 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self]
-                (response: DataResponse<User>) in
+            .responseJSON { [weak self] response in
                 
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
-                case .success:
-                    self?.loginUserWith(email: email, password: password)
+                case .success(let response):
+                    
+                    guard let jsonDict = response as? Dictionary<String, Any> else {
+                        return
+                    }
+                    
+                    guard
+                        let dataDict = jsonDict["data"],
+                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict) else {
+                            return
+                    }
+                    
+                    do {
+                        let user: User = try JSONDecoder().decode(User.self, from: dataBinary)
+                        self?.user = user
+                        self?.loginUserWith(email: email, password: password)
+                    } catch let error {
+                        print("Serialization error: \(error)")
+                    }
                 case .failure:
                     self?.showAlert(alertMessage: "Cannot register user with the given data.")
                 }
