@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		263C9320733FE5C7FE800C42 /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E87C194501CCD4B32D2C28D /* Pods_TVShows.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5C8C9D302107137000016FCF /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C9D2F2107137000016FCF /* HomeTableViewController.swift */; };
+		5C8C9D32210718B400016FCF /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C9D31210718B400016FCF /* TitleTableViewCell.swift */; };
 		5CA26D1920F555DB006275E9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA26D1820F555DB006275E9 /* Login.storyboard */; };
 		5CA26D1D20F55641006275E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA26D1C20F55641006275E9 /* LoginViewController.swift */; };
 		5CA7EC2D20EE6F2000663646 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA7EC2C20EE6F2000663646 /* AppDelegate.swift */; };
 		5CA7EC3420EE6F2200663646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CA7EC3320EE6F2200663646 /* Assets.xcassets */; };
 		5CA7EC3720EE6F2200663646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA7EC3520EE6F2200663646 /* LaunchScreen.storyboard */; };
+		5CAF0C182109E470001A1AF3 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF0C172109E470001A1AF3 /* Show.swift */; };
 		5CEEA4272104DA5E00C98286 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEEA4262104DA5E00C98286 /* User.swift */; };
 		5CEF5493210136440084A7AD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CEF5492210136440084A7AD /* Home.storyboard */; };
 		5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5494210136700084A7AD /* HomeViewController.swift */; };
@@ -20,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		0E87C194501CCD4B32D2C28D /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C8C9D2F2107137000016FCF /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		5C8C9D31210718B400016FCF /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		5CA26D1820F555DB006275E9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5CA26D1C20F55641006275E9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5CA26D2020F56632006275E9 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,6 +32,7 @@
 		5CA7EC3320EE6F2200663646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CA7EC3620EE6F2200663646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CA7EC3820EE6F2200663646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CAF0C172109E470001A1AF3 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		5CEEA4262104DA5E00C98286 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CEF5492210136440084A7AD /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		5CEF5494210136700084A7AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +84,7 @@
 		5CA7EC2B20EE6F2000663646 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				5CAF0C162109E44F001A1AF3 /* Shows */,
 				5CEF54912101361F0084A7AD /* Home */,
 				5CA26D1720F555A1006275E9 /* Login */,
 				5CA7EC2C20EE6F2000663646 /* AppDelegate.swift */,
@@ -88,11 +95,21 @@
 			path = TVShows;
 			sourceTree = "<group>";
 		};
+		5CAF0C162109E44F001A1AF3 /* Shows */ = {
+			isa = PBXGroup;
+			children = (
+				5CAF0C172109E470001A1AF3 /* Show.swift */,
+			);
+			path = Shows;
+			sourceTree = "<group>";
+		};
 		5CEF54912101361F0084A7AD /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				5CEF5492210136440084A7AD /* Home.storyboard */,
 				5CEF5494210136700084A7AD /* HomeViewController.swift */,
+				5C8C9D2F2107137000016FCF /* HomeTableViewController.swift */,
+				5C8C9D31210718B400016FCF /* TitleTableViewCell.swift */,
 			);
 			name = Home;
 			path = "New Group";
@@ -227,6 +244,9 @@
 				5CA26D1D20F55641006275E9 /* LoginViewController.swift in Sources */,
 				5CA7EC2D20EE6F2000663646 /* AppDelegate.swift in Sources */,
 				5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */,
+				5CAF0C182109E470001A1AF3 /* Show.swift in Sources */,
+				5C8C9D32210718B400016FCF /* TitleTableViewCell.swift in Sources */,
+				5C8C9D302107137000016FCF /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
