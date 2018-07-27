@@ -70,7 +70,9 @@ class HomeViewController: UIViewController{
            detailsViewController.token = loginUser?.token
            detailsViewController.showId = show.id
             
-           self.navigationController?.pushViewController(detailsViewController, animated: true)
+            let navigationController = UINavigationController.init(rootViewController:
+                detailsViewController)
+            present(navigationController, animated: true, completion: nil)
         }
         
     }

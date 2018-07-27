@@ -33,6 +33,10 @@ class ShowDetailsViewController: UIViewController {
         getShowEpisodes()
     }
     
+    @IBAction func navigateback(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     @IBAction func addNewEpisode(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AddEpisode", bundle: nil)
         let addEpisodeViewController =

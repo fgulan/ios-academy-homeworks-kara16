@@ -30,11 +30,24 @@
                                             <constraint firstAttribute="width" constant="100" id="BsP-Ky-jmG"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZo-WZ-3It">
+                                        <rect key="frame" x="10" y="10" width="56" height="58"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="Ngs-hp-mMa"/>
+                                            <constraint firstAttribute="width" constant="56" id="kbW-IC-bG4"/>
+                                        </constraints>
+                                        <state key="normal" image="ic-navigate-back"/>
+                                        <connections>
+                                            <action selector="navigateback:" destination="jWf-gR-9Dh" eventType="touchUpInside" id="THj-dC-Oq8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Jxg-8P-65r" firstAttribute="centerY" secondItem="iDy-ES-cNP" secondAttribute="centerY" id="eWY-uL-Dc8"/>
+                                    <constraint firstItem="nZo-WZ-3It" firstAttribute="leading" secondItem="iDy-ES-cNP" secondAttribute="leading" constant="10" id="mxM-Ed-PAF"/>
                                     <constraint firstItem="Jxg-8P-65r" firstAttribute="centerX" secondItem="iDy-ES-cNP" secondAttribute="centerX" id="wL4-x1-SOT"/>
+                                    <constraint firstItem="nZo-WZ-3It" firstAttribute="top" secondItem="iDy-ES-cNP" secondAttribute="top" constant="10" id="ym5-DX-TwG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8P-3O-7yT" userLabel="TitleView">
@@ -184,6 +197,7 @@
     </scenes>
     <resources>
         <image name="ic-fab-button" width="68" height="74"/>
+        <image name="ic-navigate-back" width="32" height="32"/>
         <image name="ic-navigation-chevron-right-medium" width="24" height="24"/>
         <image name="login-logo" width="75" height="80"/>
     </resources>
