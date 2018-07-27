@@ -27,9 +27,7 @@ class HomeViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "Shows"
-      
     }
-    
     
     private func getShows(){
         let token: String = loginUser!.token
@@ -55,19 +53,26 @@ class HomeViewController: UIViewController{
                 case .failure:
                     print("Fail")
                 }
-                
         }
     }
 }
+
     extension HomeViewController: UITableViewDelegate {
         
-        /*
-         Now, we are using autosizing via autolayout, if you want custom size override this function.
-         And also, check other methods from `UITableViewDelegate`
-         */
-        //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //        return 90
-        //    }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let show = shows[indexPath.row]
+            
+            let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+            let detailsViewController = storyboard.instantiateViewController(
+                withIdentifier: "ShowDetailsViewController"
+                ) as! ShowDetailsViewController
+            
+           detailsViewController.token = loginUser?.token
+           detailsViewController.showId = show.id
+            
+           self.navigationController?.pushViewController(detailsViewController, animated: true)
+        }
+        
     }
     
     extension HomeViewController: UITableViewDataSource {
@@ -78,7 +83,7 @@ class HomeViewController: UIViewController{
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return shows.count
-    }
+        }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell: TitleTableViewCell = tableView.dequeueReusableCell(
@@ -91,4 +96,4 @@ class HomeViewController: UIViewController{
            
             return cell
         }
-}
+    }
