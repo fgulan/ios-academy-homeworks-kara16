@@ -13,55 +13,51 @@ import CodableAlamofire
 
 class LoginViewController: UIViewController {
     private var checked = false
+    private var user: User?
+    private var loginUser: LoginData?
     
-    @IBOutlet weak var eMailText: UITextField!
+    @IBOutlet weak var eMailField: UITextField!
     
-    @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
-    @IBOutlet weak var checkbox: UIButton!
+    @IBOutlet weak var checkboxButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func createAccountPushHome(_ sender: Any) {
-        if(isAnyFieldEmpty(userEMail: eMailText.text!, password: passwordText.text!)) {
+        if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
+           registerUserWith(email: eMailField.text!, password: passwordField.text!)
+        }else{
             showAlert(alertMessage: "All fields required!")
-            return
         }
-        
-        registerUserWith(email: eMailText.text!, password: passwordText.text!)
     }
     
     @IBAction func logInPushHome(_ sender: Any) {
         
-        if(isAnyFieldEmpty(userEMail: eMailText.text!, password: passwordText.text!)) {
+        if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
+            loginUserWith(email: eMailField.text!, password: passwordField.text!)
+        }else{
             showAlert(alertMessage: "All fields required!")
-            return
         }
-        
-        loginUserWith(email: eMailText.text!, password: passwordText.text!)
-    }
-    
-    private func isAnyFieldEmpty(userEMail: String, password: String) -> Bool{
        
-        return userEMail.isEmpty || password.isEmpty
     }
     
     private func showAlert(alertMessage: String) {
         let alertController = UIAlertController(title: "Alert", message:
-            alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            alertMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default,handler: nil))
         
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func pushHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let viewControllerD =
-            storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        navigationController?.pushViewController(viewControllerD, animated:
-            true)
+            storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        viewControllerD.loginUser = self.loginUser
+        navigationController?.setViewControllers([viewControllerD], animated: true)
     }
     
     private func loginUserWith(email: String, password: String) {
@@ -71,21 +67,39 @@ class LoginViewController: UIViewController {
             "email": email,
             "password": password
         ]
+        
         Alamofire
             .request("https://api.infinum.academy/api/users/sessions",
                      method: .post,
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseJSON{
+            .responseJSON{ [weak self]
         response in
          SVProgressHUD.dismiss()
                 
         switch response.result {
-        case .success:
-            self.pushHome()
-        case .failure(let error):
-            print("LOGIN API failure: \(error)")
+        case .success(let response):
+            guard let jsonDict = response as? Dictionary<String, Any> else {
+                return
+            }
+            
+            guard
+                let dataDict = jsonDict["data"],
+                let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict) else {
+                    return
+            }
+            
+            do {
+                let loginUser: LoginData = try JSONDecoder().decode(LoginData.self, from: dataBinary)
+                self?.loginUser = loginUser
+                self?.pushHome()
+            } catch let error {
+                print("Serialization error: \(error)")
+            }
+            
+        case .failure:
+            self?.showAlert(alertMessage: "Invalid username or password.")
         }
         }
     }
@@ -104,16 +118,32 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<User>) in
+            .responseJSON { [weak self] response in
                 
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
-                case .success:
-                    self.loginUserWith(email: email, password: password)
-                case .failure(let error):
-                    print("REGISTER API failure: \(error)")
+                case .success(let response):
+                    
+                    guard let jsonDict = response as? Dictionary<String, Any> else {
+                        return
+                    }
+                    
+                    guard
+                        let dataDict = jsonDict["data"],
+                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict) else {
+                            return
+                    }
+                    
+                    do {
+                        let user: User = try JSONDecoder().decode(User.self, from: dataBinary)
+                        self?.user = user
+                        self?.loginUserWith(email: email, password: password)
+                    } catch let error {
+                        print("Serialization error: \(error)")
+                    }
+                case .failure:
+                    self?.showAlert(alertMessage: "Cannot register user with the given data.")
                 }
         }
         
@@ -124,9 +154,9 @@ class LoginViewController: UIViewController {
         checked = !checked
         
         if checked {
-            checkbox.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
+            checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
         }else {
-            checkbox.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
+            checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
         }
     }
 }
