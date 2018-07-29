@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		263C9320733FE5C7FE800C42 /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E87C194501CCD4B32D2C28D /* Pods_TVShows.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5C8721D7210A4175008A5ABE /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8721D6210A4175008A5ABE /* ShowDetailsViewController.swift */; };
 		5C8721D9210A41CE008A5ABE /* ShowDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C8721D8210A41CE008A5ABE /* ShowDetails.storyboard */; };
 		5C8721DB210A53A2008A5ABE /* ShowDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8721DA210A53A2008A5ABE /* ShowDetails.swift */; };
@@ -25,10 +24,10 @@
 		5CEEA4272104DA5E00C98286 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEEA4262104DA5E00C98286 /* User.swift */; };
 		5CEF5493210136440084A7AD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CEF5492210136440084A7AD /* Home.storyboard */; };
 		5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5494210136700084A7AD /* HomeViewController.swift */; };
+		FCEF1098ED074B6236AC5980 /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F4B6C6CCF2FDF8CE106873 /* Pods_TVShows.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E87C194501CCD4B32D2C28D /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C8721D6210A4175008A5ABE /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		5C8721D8210A41CE008A5ABE /* ShowDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowDetails.storyboard; sourceTree = "<group>"; };
 		5C8721DA210A53A2008A5ABE /* ShowDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetails.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		5CEF5494210136700084A7AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ABB7B502D24B27308F3AAF5E /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		D5A96BD6680F674AA977B175 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
+		F2F4B6C6CCF2FDF8CE106873 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				263C9320733FE5C7FE800C42 /* Pods_TVShows.framework in Frameworks */,
+				FCEF1098ED074B6236AC5980 /* Pods_TVShows.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +152,7 @@
 		60D4FCA06FCB4BD212C4C2A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0E87C194501CCD4B32D2C28D /* Pods_TVShows.framework */,
+				F2F4B6C6CCF2FDF8CE106873 /* Pods_TVShows.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,7 +168,7 @@
 				5CA7EC2520EE6F2000663646 /* Sources */,
 				5CA7EC2620EE6F2000663646 /* Frameworks */,
 				5CA7EC2720EE6F2000663646 /* Resources */,
-				59A38CBB23A07E1C102E3E1A /* [CP] Embed Pods Frameworks */,
+				41DC0AF42509E733A3D873B8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,7 +247,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		59A38CBB23A07E1C102E3E1A /* [CP] Embed Pods Frameworks */ = {
+		41DC0AF42509E733A3D873B8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -256,12 +256,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TVShows/Pods-TVShows-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +343,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -401,6 +404,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -424,18 +428,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TVShows/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					"\"SVProgressHUD\"",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = co.kara16.TVShows;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -446,18 +449,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TVShows/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					"\"SVProgressHUD\"",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = co.kara16.TVShows;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
