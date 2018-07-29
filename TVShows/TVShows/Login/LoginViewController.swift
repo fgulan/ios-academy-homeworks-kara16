@@ -24,24 +24,67 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let email = UserDefaults.standard.value(forKey: "email") as? String,
+           let password = UserDefaults.standard.value(forKey: "password") as? String {
+            
+            eMailField.text = email
+            passwordField.text = password
+            checkBoxChanged(checkboxButton)
+        }
     }
     
     @IBAction func createAccountPushHome(_ sender: Any) {
         if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
            registerUserWith(email: eMailField.text!, password: passwordField.text!)
         }else{
-            showAlert(alertMessage: "All fields required!")
+            if eMailField.text!.isEmpty{
+                shakeIfEmpty(textField: eMailField)
+            }
+            
+            if passwordField.text!.isEmpty{
+                shakeIfEmpty(textField: passwordField)
+            }
         }
     }
+    
+   
     
     @IBAction func logInPushHome(_ sender: Any) {
         
         if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
+            if checkboxButton.isSelected{
+                saveUser(email: email, password: password)
+            }
+            
             loginUserWith(email: eMailField.text!, password: passwordField.text!)
         }else{
-            showAlert(alertMessage: "All fields required!")
+            if eMailField.text!.isEmpty{
+                shakeIfEmpty(textField: eMailField)
+            }
+            
+            if passwordField.text!.isEmpty{
+                shakeIfEmpty(textField: passwordField)
+            }
         }
        
+    }
+    
+    private func saveUser(email: String, password: String){
+        UserDefaults.standard.setValue(email, forKey: "email")
+        UserDefaults.standard.setValue(password, forKey: "password")
+    }
+    
+    private func shakeIfEmpty(textField: UITextField){
+        let animation = CABasicAnimation(keyPath: "position")
+        
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(x: textField.center.x - 4.0, y: textField.center.y)
+        animation.toValue = CGPoint(x: textField.center.x + 4.0, y: textField.center.y)
+        
+        textField.layer.add(animation, forKey: "position")
     }
     
     private func showAlert(alertMessage: String) {
@@ -74,30 +117,15 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseJSON{ [weak self]
-        response in
-         SVProgressHUD.dismiss()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {[weak self] (response:
+                DataResponse<LoginData>) in
+                
+                SVProgressHUD.dismiss()
                 
         switch response.result {
-        case .success(let response):
-            guard let jsonDict = response as? Dictionary<String, Any> else {
-                return
-            }
-            
-            guard
-                let dataDict = jsonDict["data"],
-                let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict) else {
-                    return
-            }
-            
-            do {
-                let loginUser: LoginData = try JSONDecoder().decode(LoginData.self, from: dataBinary)
+        case .success(let loginUser):
                 self?.loginUser = loginUser
                 self?.pushHome()
-            } catch let error {
-                print("Serialization error: \(error)")
-            }
-            
         case .failure:
             self?.showAlert(alertMessage: "Invalid username or password.")
         }
@@ -118,30 +146,20 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseJSON { [weak self] response in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {[weak self] (response:
+                DataResponse<User>) in
                 
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
-                case .success(let response):
+                case .success(let user):
+                    self?.user = user
                     
-                    guard let jsonDict = response as? Dictionary<String, Any> else {
-                        return
+                   if let _: Bool = self?.checkboxButton.isSelected {
+                        self?.saveUser(email: email, password: password)
                     }
                     
-                    guard
-                        let dataDict = jsonDict["data"],
-                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict) else {
-                            return
-                    }
-                    
-                    do {
-                        let user: User = try JSONDecoder().decode(User.self, from: dataBinary)
-                        self?.user = user
-                        self?.loginUserWith(email: email, password: password)
-                    } catch let error {
-                        print("Serialization error: \(error)")
-                    }
+                    self?.loginUserWith(email: email, password: password)
                 case .failure:
                     self?.showAlert(alertMessage: "Cannot register user with the given data.")
                 }
@@ -150,10 +168,11 @@ class LoginViewController: UIViewController {
         
     }
     
-    @IBAction func checkBoxChanged(_ sender: Any) {
-        checked = !checked
+    @IBAction func checkBoxChanged(_ sender: UIButton) {
         
-        if checked {
+        sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected {
             checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
         }else {
             checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
