@@ -62,7 +62,7 @@ class AddEpisodeViewController: UIViewController {
         SVProgressHUD.show()
         
         Alamofire
-            .request("https://api.infinum.academy/api/episodes",
+            .request(Constants.URL.baseUrl + "/episodes",
                      method: .post,
                      parameters: parameters,
                      encoding: JSONEncoding.default,

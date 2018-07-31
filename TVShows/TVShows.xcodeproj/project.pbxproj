@@ -21,6 +21,8 @@
 		5CA7EC3420EE6F2200663646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CA7EC3320EE6F2200663646 /* Assets.xcassets */; };
 		5CA7EC3720EE6F2200663646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA7EC3520EE6F2200663646 /* LaunchScreen.storyboard */; };
 		5CAF0C182109E470001A1AF3 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF0C172109E470001A1AF3 /* Show.swift */; };
+		5CCA32DF2110CACD00261F43 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCA32DE2110CACD00261F43 /* UITextFieldExtension.swift */; };
+		5CCA32E12110CC5D00261F43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCA32E02110CC5D00261F43 /* Constants.swift */; };
 		5CEEA4272104DA5E00C98286 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEEA4262104DA5E00C98286 /* User.swift */; };
 		5CEF5493210136440084A7AD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CEF5492210136440084A7AD /* Home.storyboard */; };
 		5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5494210136700084A7AD /* HomeViewController.swift */; };
@@ -44,6 +46,8 @@
 		5CA7EC3620EE6F2200663646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CA7EC3820EE6F2200663646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CAF0C172109E470001A1AF3 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		5CCA32DE2110CACD00261F43 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		5CCA32E02110CC5D00261F43 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5CEEA4262104DA5E00C98286 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CEF5492210136440084A7AD /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		5CEF5494210136700084A7AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +101,6 @@
 			children = (
 				5CA26D1820F555DB006275E9 /* Login.storyboard */,
 				5CA26D1C20F55641006275E9 /* LoginViewController.swift */,
-				5CEEA4262104DA5E00C98286 /* User.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -115,27 +118,78 @@
 		5CA7EC2B20EE6F2000663646 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
-				5C924D9E210A877200A02CC1 /* AddEpisode */,
-				5C8721D5210A40F5008A5ABE /* ShowDetails */,
-				5CAF0C162109E44F001A1AF3 /* Shows */,
-				5CEF54912101361F0084A7AD /* Home */,
-				5CA26D1720F555A1006275E9 /* Login */,
-				5CA7EC2C20EE6F2000663646 /* AppDelegate.swift */,
-				5CA7EC3320EE6F2200663646 /* Assets.xcassets */,
-				5CA7EC3520EE6F2200663646 /* LaunchScreen.storyboard */,
-				5CA7EC3820EE6F2200663646 /* Info.plist */,
+				5CCA32D62110BA0500261F43 /* Application */,
+				5CCA32D92110BA7500261F43 /* Commons */,
+				5CCA32D72110BA1400261F43 /* Modules */,
+				5CCA32D82110BA3E00261F43 /* Resources */,
+				5CCA32DD2110CA2B00261F43 /* SupportingFiles */,
 			);
 			path = TVShows;
 			sourceTree = "<group>";
 		};
-		5CAF0C162109E44F001A1AF3 /* Shows */ = {
+		5CCA32D52110B96E00261F43 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5CEEA4262104DA5E00C98286 /* User.swift */,
 				5CAF0C172109E470001A1AF3 /* Show.swift */,
 				5C8721DA210A53A2008A5ABE /* ShowDetails.swift */,
 				5C8721DC210A720C008A5ABE /* Episode.swift */,
 			);
-			path = Shows;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5CCA32D62110BA0500261F43 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5CA7EC2C20EE6F2000663646 /* AppDelegate.swift */,
+				5CCA32E02110CC5D00261F43 /* Constants.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5CCA32D72110BA1400261F43 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				5C924D9E210A877200A02CC1 /* AddEpisode */,
+				5CEF54912101361F0084A7AD /* Home */,
+				5CA26D1720F555A1006275E9 /* Login */,
+				5C8721D5210A40F5008A5ABE /* ShowDetails */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		5CCA32D82110BA3E00261F43 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5CA7EC3320EE6F2200663646 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5CCA32D92110BA7500261F43 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				5CCA32DC2110C9C900261F43 /* Extensions */,
+				5CCA32D52110B96E00261F43 /* Models */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
+		5CCA32DC2110C9C900261F43 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5CCA32DE2110CACD00261F43 /* UITextFieldExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5CCA32DD2110CA2B00261F43 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5CA7EC3820EE6F2200663646 /* Info.plist */,
+				5CA7EC3520EE6F2200663646 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		5CEF54912101361F0084A7AD /* Home */ = {
@@ -145,8 +199,7 @@
 				5CEF5494210136700084A7AD /* HomeViewController.swift */,
 				5C8C9D31210718B400016FCF /* TitleTableViewCell.swift */,
 			);
-			name = Home;
-			path = "New Group";
+			path = Home;
 			sourceTree = "<group>";
 		};
 		60D4FCA06FCB4BD212C4C2A0 /* Frameworks */ = {
@@ -279,11 +332,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C924DA2210A87B100A02CC1 /* AddEpisodeViewController.swift in Sources */,
+				5CCA32DF2110CACD00261F43 /* UITextFieldExtension.swift in Sources */,
 				5CEEA4272104DA5E00C98286 /* User.swift in Sources */,
 				5CA26D1D20F55641006275E9 /* LoginViewController.swift in Sources */,
 				5CA7EC2D20EE6F2000663646 /* AppDelegate.swift in Sources */,
 				5C8721DB210A53A2008A5ABE /* ShowDetails.swift in Sources */,
 				5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */,
+				5CCA32E12110CC5D00261F43 /* Constants.swift in Sources */,
 				5CAF0C182109E470001A1AF3 /* Show.swift in Sources */,
 				5C924D9D210A7F0600A02CC1 /* ShowDetailsViewCell.swift in Sources */,
 				5C8721D7210A4175008A5ABE /* ShowDetailsViewController.swift in Sources */,
@@ -429,7 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = TVShows/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TVShows/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = TVShows/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TVShows/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

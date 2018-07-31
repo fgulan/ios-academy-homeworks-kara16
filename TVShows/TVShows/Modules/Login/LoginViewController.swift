@@ -39,16 +39,14 @@ class LoginViewController: UIViewController {
            registerUserWith(email: eMailField.text!, password: passwordField.text!)
         }else{
             if eMailField.text!.isEmpty{
-                shakeIfEmpty(textField: eMailField)
+                eMailField.shake()
             }
             
             if passwordField.text!.isEmpty{
-                shakeIfEmpty(textField: passwordField)
+                passwordField.shake()
             }
         }
     }
-    
-   
     
     @IBAction func logInPushHome(_ sender: Any) {
         
@@ -60,11 +58,11 @@ class LoginViewController: UIViewController {
             loginUserWith(email: eMailField.text!, password: passwordField.text!)
         }else{
             if eMailField.text!.isEmpty{
-                shakeIfEmpty(textField: eMailField)
+                eMailField.shake()
             }
             
             if passwordField.text!.isEmpty{
-                shakeIfEmpty(textField: passwordField)
+                passwordField.shake()
             }
         }
        
@@ -73,18 +71,6 @@ class LoginViewController: UIViewController {
     private func saveUser(email: String, password: String){
         UserDefaults.standard.setValue(email, forKey: "email")
         UserDefaults.standard.setValue(password, forKey: "password")
-    }
-    
-    private func shakeIfEmpty(textField: UITextField){
-        let animation = CABasicAnimation(keyPath: "position")
-        
-        animation.duration = 0.05
-        animation.repeatCount = 5
-        animation.autoreverses = true
-        animation.fromValue = CGPoint(x: textField.center.x - 4.0, y: textField.center.y)
-        animation.toValue = CGPoint(x: textField.center.x + 4.0, y: textField.center.y)
-        
-        textField.layer.add(animation, forKey: "position")
     }
     
     private func showAlert(alertMessage: String) {
@@ -112,7 +98,7 @@ class LoginViewController: UIViewController {
         ]
         
         Alamofire
-            .request("https://api.infinum.academy/api/users/sessions",
+            .request(Constants.URL.baseUrl + "/users/sessions",
                      method: .post,
                      parameters: parameters,
                      encoding: JSONEncoding.default)
@@ -141,7 +127,7 @@ class LoginViewController: UIViewController {
         ]
         
         Alamofire
-            .request("https://api.infinum.academy/api/users",
+            .request(Constants.URL.baseUrl + "/users",
                      method: .post,
                      parameters: parameters,
                      encoding: JSONEncoding.default)

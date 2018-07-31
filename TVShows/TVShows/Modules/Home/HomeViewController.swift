@@ -34,14 +34,21 @@ class HomeViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
         navigationItem.title = "Shows"
     }
     
     @objc private func _logoutActionHandler() {
         let domain = Bundle.main.bundleIdentifier!
+        
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
         
+        goToLoginScreen()
+    }
+    
+    private func goToLoginScreen(){
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let loginViewController =
             storyboard.instantiateViewController(withIdentifier: "LoginViewController")
@@ -57,7 +64,7 @@ class HomeViewController: UIViewController{
         SVProgressHUD.show()
         
         Alamofire
-            .request("https://api.infinum.academy/api/shows",
+            .request(Constants.URL.baseUrl + "/shows",
                      method: .get,
                      encoding: JSONEncoding.default,
                      headers: headers)
@@ -83,13 +90,20 @@ class HomeViewController: UIViewController{
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let show = shows[indexPath.row]
             
+            jumpToShowDetails(show: show)
+            
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
+        
+        private func jumpToShowDetails(show: Show){
             let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
             let detailsViewController = storyboard.instantiateViewController(
                 withIdentifier: "ShowDetailsViewController"
                 ) as! ShowDetailsViewController
             
-           detailsViewController.token = loginUser?.token
-           detailsViewController.showId = show.id
+            detailsViewController.token = loginUser?.token
+            detailsViewController.showId = show.id
+            
             
             let navigationController = UINavigationController.init(rootViewController:
                 detailsViewController)
@@ -101,7 +115,7 @@ class HomeViewController: UIViewController{
     extension HomeViewController: UITableViewDataSource {
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            let cellDefaultHeight = CGFloat(170) /*the default height of the cell*/;
+            let cellDefaultHeight = CGFloat(160) /*the default height of the cell*/;
             let screenDefaultHeight = CGFloat(480)/*the default height of the screen i.e. 480 in iPhone 4*/;
             
             let factor = cellDefaultHeight/screenDefaultHeight

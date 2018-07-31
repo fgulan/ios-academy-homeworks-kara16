@@ -37,7 +37,7 @@ class ShowDetailsViewController: UIViewController {
     }
     
     private func getCoverImage(imageUrl: String){
-        let url = URL(string: "https://api.infinum.academy" + imageUrl)
+        let url = URL(string: Constants.URL.baseDomainUrl + imageUrl)
         coverImageView.kf.setImage(with: url)
     }
     
@@ -66,7 +66,7 @@ class ShowDetailsViewController: UIViewController {
         SVProgressHUD.show()
         
         Alamofire
-            .request("https://api.infinum.academy/api/shows/" + showId!,
+            .request(Constants.URL.baseUrl + "/shows/" + showId!,
                      method: .get,
                      encoding: JSONEncoding.default,
                      headers: headers)
@@ -94,7 +94,7 @@ class ShowDetailsViewController: UIViewController {
         SVProgressHUD.show()
         
         Alamofire
-            .request("https://api.infinum.academy/api/shows/" + showId! + "/episodes",
+            .request(Constants.URL.baseUrl + "/shows/" + showId! + "/episodes",
                      method: .get,
                      //                     parameters: parameter,
                 encoding: JSONEncoding.default,
