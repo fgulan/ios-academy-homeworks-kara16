@@ -16,6 +16,7 @@ class ShowDetailsViewController: UIViewController {
     
     private var episodes: [Episode] = []
     
+    @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var episodesNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -29,8 +30,15 @@ class ShowDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         getShowInfo()
         getShowEpisodes()
+    }
+    
+    private func getCoverImage(imageUrl: String){
+        let url = URL(string: "https://api.infinum.academy" + imageUrl)
+        coverImageView.kf.setImage(with: url)
     }
     
     @IBAction func navigateback(_ sender: Any) {
@@ -72,6 +80,7 @@ class ShowDetailsViewController: UIViewController {
                 case .success(let showDetails):
                     self?.titleLabel.text = showDetails.title
                     self?.descriptionLabel.text = showDetails.description
+                    self?.getCoverImage(imageUrl: showDetails.imageUrl)
                 case .failure:
                     print("Fail")
                 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="omd-Nr-XkB">
-    <device id="retina5_5" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,37 +16,44 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="omd-Nr-XkB" customClass="HomeViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lv7-ao-lA6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hDW-Ng-DEF">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hDW-Ng-DEF">
+                                <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TitleTableViewCell" id="pby-W1-T4c" customClass="TitleTableViewCell" customModule="TVShows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="768" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pby-W1-T4c" id="wO5-9X-LaO">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="169.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="okc-F0-mnD">
-                                                    <rect key="frame" x="20" y="11" width="374" height="22"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uw4-Lp-DJc">
+                                                    <rect key="frame" x="0.0" y="5" width="230.5" height="159.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="okc-F0-mnD">
+                                                    <rect key="frame" x="245.5" y="5" width="517.5" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="okc-F0-mnD" firstAttribute="top" secondItem="wO5-9X-LaO" secondAttribute="topMargin" id="C7H-Zv-DFr"/>
-                                                <constraint firstItem="okc-F0-mnD" firstAttribute="leading" secondItem="wO5-9X-LaO" secondAttribute="leadingMargin" id="lN0-BA-RVa"/>
-                                                <constraint firstItem="okc-F0-mnD" firstAttribute="bottom" secondItem="wO5-9X-LaO" secondAttribute="bottomMargin" id="vAF-U0-kTO"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="okc-F0-mnD" secondAttribute="trailing" id="x95-Ao-3rt"/>
+                                                <constraint firstAttribute="bottom" secondItem="uw4-Lp-DJc" secondAttribute="bottom" constant="5" id="02R-dm-tkj"/>
+                                                <constraint firstItem="uw4-Lp-DJc" firstAttribute="leading" secondItem="wO5-9X-LaO" secondAttribute="leading" id="10G-bx-huw"/>
+                                                <constraint firstItem="okc-F0-mnD" firstAttribute="leading" secondItem="uw4-Lp-DJc" secondAttribute="trailing" constant="15" id="QJx-OY-Bpc"/>
+                                                <constraint firstItem="uw4-Lp-DJc" firstAttribute="width" secondItem="wO5-9X-LaO" secondAttribute="width" multiplier="0.3" id="VVS-h7-0ft"/>
+                                                <constraint firstAttribute="trailing" secondItem="okc-F0-mnD" secondAttribute="trailing" constant="5" id="XFn-Ff-SMc"/>
+                                                <constraint firstItem="okc-F0-mnD" firstAttribute="top" secondItem="wO5-9X-LaO" secondAttribute="top" constant="5" id="crs-hq-vpy"/>
+                                                <constraint firstItem="uw4-Lp-DJc" firstAttribute="top" secondItem="wO5-9X-LaO" secondAttribute="top" constant="5" id="s5x-bO-ssk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="coverImageView" destination="uw4-Lp-DJc" id="7BM-u9-pQp"/>
                                             <outlet property="showTitleLabel" destination="okc-F0-mnD" id="F3z-Mf-yNI"/>
                                         </connections>
                                     </tableViewCell>
@@ -69,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmq-5X-bni" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="157.59999999999999" y="135.38230884557723"/>
+            <point key="canvasLocation" x="155.07246376811597" y="135.32608695652175"/>
         </scene>
     </scenes>
 </document>
