@@ -15,7 +15,7 @@ extension UITextField {
         let animation = CABasicAnimation(keyPath: "position")
         
         animation.duration = 0.05
-        animation.repeatCount = 5
+        animation.repeatCount = 7
         animation.autoreverses = true
         animation.fromValue = CGPoint(x: center.x - 4.0, y: center.y)
         animation.toValue = CGPoint(x: center.x + 4.0, y: center.y)
