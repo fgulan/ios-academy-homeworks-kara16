@@ -105,7 +105,7 @@ class HomeViewController: UIViewController{
             detailsViewController.showId = show.id
             
             
-            let navigationController = UINavigationController.init(rootViewController:
+            let navigationController = UINavigationController(rootViewController:
                 detailsViewController)
             present(navigationController, animated: true, completion: nil)
         }
