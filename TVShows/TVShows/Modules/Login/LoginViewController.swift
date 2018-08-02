@@ -25,12 +25,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         if let email = UserDefaults.standard.value(forKey: "email") as? String,
            let password = UserDefaults.standard.value(forKey: "password") as? String {
             
             eMailField.text = email
             passwordField.text = password
             checkBoxChanged(checkboxButton)
+            
+            loginUserWith(email: email, password: password)
         }
     }
     
