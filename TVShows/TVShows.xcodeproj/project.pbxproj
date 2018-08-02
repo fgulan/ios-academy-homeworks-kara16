@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C53E86E2112F35D008ED420 /* EpisodeCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53E86D2112F35D008ED420 /* EpisodeCommentTableViewCell.swift */; };
+		5C53E8702113203D008ED420 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53E86F2113203D008ED420 /* Comment.swift */; };
+		5C53E8722113426E008ED420 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53E8712113426E008ED420 /* UIViewControllerExtension.swift */; };
 		5C8721D7210A4175008A5ABE /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8721D6210A4175008A5ABE /* ShowDetailsViewController.swift */; };
 		5C8721D9210A41CE008A5ABE /* ShowDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C8721D8210A41CE008A5ABE /* ShowDetails.storyboard */; };
 		5C8721DB210A53A2008A5ABE /* ShowDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8721DA210A53A2008A5ABE /* ShowDetails.swift */; };
@@ -21,15 +24,23 @@
 		5CA7EC3420EE6F2200663646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CA7EC3320EE6F2200663646 /* Assets.xcassets */; };
 		5CA7EC3720EE6F2200663646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA7EC3520EE6F2200663646 /* LaunchScreen.storyboard */; };
 		5CAF0C182109E470001A1AF3 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF0C172109E470001A1AF3 /* Show.swift */; };
+		5CC7DD482111DE6A0070171B /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7DD472111DE6A0070171B /* Media.swift */; };
+		5CC7DD4B2111EB780070171B /* EpisodeDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC7DD4A2111EB780070171B /* EpisodeDetails.storyboard */; };
+		5CC7DD4D2111EBBB0070171B /* EpisodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7DD4C2111EBBB0070171B /* EpisodeDetailsViewController.swift */; };
 		5CCA32DF2110CACD00261F43 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCA32DE2110CACD00261F43 /* UITextFieldExtension.swift */; };
 		5CCA32E12110CC5D00261F43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCA32E02110CC5D00261F43 /* Constants.swift */; };
 		5CEEA4272104DA5E00C98286 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEEA4262104DA5E00C98286 /* User.swift */; };
 		5CEF5493210136440084A7AD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CEF5492210136440084A7AD /* Home.storyboard */; };
 		5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5494210136700084A7AD /* HomeViewController.swift */; };
+		5CF2D023211227F500C0350D /* EpisodeComments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CF2D022211227F500C0350D /* EpisodeComments.storyboard */; };
+		5CF2D0282112288500C0350D /* EpisodeCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2D0272112288500C0350D /* EpisodeCommentsViewController.swift */; };
 		FCEF1098ED074B6236AC5980 /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F4B6C6CCF2FDF8CE106873 /* Pods_TVShows.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C53E86D2112F35D008ED420 /* EpisodeCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCommentTableViewCell.swift; sourceTree = "<group>"; };
+		5C53E86F2113203D008ED420 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		5C53E8712113426E008ED420 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		5C8721D6210A4175008A5ABE /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		5C8721D8210A41CE008A5ABE /* ShowDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowDetails.storyboard; sourceTree = "<group>"; };
 		5C8721DA210A53A2008A5ABE /* ShowDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetails.swift; sourceTree = "<group>"; };
@@ -46,11 +57,16 @@
 		5CA7EC3620EE6F2200663646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CA7EC3820EE6F2200663646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CAF0C172109E470001A1AF3 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		5CC7DD472111DE6A0070171B /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		5CC7DD4A2111EB780070171B /* EpisodeDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EpisodeDetails.storyboard; sourceTree = "<group>"; };
+		5CC7DD4C2111EBBB0070171B /* EpisodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailsViewController.swift; sourceTree = "<group>"; };
 		5CCA32DE2110CACD00261F43 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		5CCA32E02110CC5D00261F43 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5CEEA4262104DA5E00C98286 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CEF5492210136440084A7AD /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		5CEF5494210136700084A7AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5CF2D022211227F500C0350D /* EpisodeComments.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EpisodeComments.storyboard; sourceTree = "<group>"; };
+		5CF2D0272112288500C0350D /* EpisodeCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCommentsViewController.swift; sourceTree = "<group>"; };
 		ABB7B502D24B27308F3AAF5E /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		D5A96BD6680F674AA977B175 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 		F2F4B6C6CCF2FDF8CE106873 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +143,15 @@
 			path = TVShows;
 			sourceTree = "<group>";
 		};
+		5CC7DD492111EB5D0070171B /* EpisodeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				5CC7DD4A2111EB780070171B /* EpisodeDetails.storyboard */,
+				5CC7DD4C2111EBBB0070171B /* EpisodeDetailsViewController.swift */,
+			);
+			path = EpisodeDetails;
+			sourceTree = "<group>";
+		};
 		5CCA32D52110B96E00261F43 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +159,8 @@
 				5CAF0C172109E470001A1AF3 /* Show.swift */,
 				5C8721DA210A53A2008A5ABE /* ShowDetails.swift */,
 				5C8721DC210A720C008A5ABE /* Episode.swift */,
+				5CC7DD472111DE6A0070171B /* Media.swift */,
+				5C53E86F2113203D008ED420 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +177,8 @@
 		5CCA32D72110BA1400261F43 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5CF2D0242112280500C0350D /* EpisodeComments */,
+				5CC7DD492111EB5D0070171B /* EpisodeDetails */,
 				5C924D9E210A877200A02CC1 /* AddEpisode */,
 				5CEF54912101361F0084A7AD /* Home */,
 				5CA26D1720F555A1006275E9 /* Login */,
@@ -179,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				5CCA32DE2110CACD00261F43 /* UITextFieldExtension.swift */,
+				5C53E8712113426E008ED420 /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -200,6 +230,16 @@
 				5C8C9D31210718B400016FCF /* TitleTableViewCell.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		5CF2D0242112280500C0350D /* EpisodeComments */ = {
+			isa = PBXGroup;
+			children = (
+				5CF2D022211227F500C0350D /* EpisodeComments.storyboard */,
+				5CF2D0272112288500C0350D /* EpisodeCommentsViewController.swift */,
+				5C53E86D2112F35D008ED420 /* EpisodeCommentTableViewCell.swift */,
+			);
+			path = EpisodeComments;
 			sourceTree = "<group>";
 		};
 		60D4FCA06FCB4BD212C4C2A0 /* Frameworks */ = {
@@ -270,12 +310,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CF2D023211227F500C0350D /* EpisodeComments.storyboard in Resources */,
 				5CA7EC3720EE6F2200663646 /* LaunchScreen.storyboard in Resources */,
 				5CA7EC3420EE6F2200663646 /* Assets.xcassets in Resources */,
 				5C924DA0210A878A00A02CC1 /* AddEpisode.storyboard in Resources */,
 				5CA26D1920F555DB006275E9 /* Login.storyboard in Resources */,
 				5C8721D9210A41CE008A5ABE /* ShowDetails.storyboard in Resources */,
 				5CEF5493210136440084A7AD /* Home.storyboard in Resources */,
+				5CC7DD4B2111EB780070171B /* EpisodeDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,15 +375,21 @@
 			files = (
 				5C924DA2210A87B100A02CC1 /* AddEpisodeViewController.swift in Sources */,
 				5CCA32DF2110CACD00261F43 /* UITextFieldExtension.swift in Sources */,
+				5CC7DD482111DE6A0070171B /* Media.swift in Sources */,
 				5CEEA4272104DA5E00C98286 /* User.swift in Sources */,
 				5CA26D1D20F55641006275E9 /* LoginViewController.swift in Sources */,
 				5CA7EC2D20EE6F2000663646 /* AppDelegate.swift in Sources */,
 				5C8721DB210A53A2008A5ABE /* ShowDetails.swift in Sources */,
+				5C53E8702113203D008ED420 /* Comment.swift in Sources */,
 				5CEF5495210136700084A7AD /* HomeViewController.swift in Sources */,
+				5CC7DD4D2111EBBB0070171B /* EpisodeDetailsViewController.swift in Sources */,
+				5C53E86E2112F35D008ED420 /* EpisodeCommentTableViewCell.swift in Sources */,
 				5CCA32E12110CC5D00261F43 /* Constants.swift in Sources */,
 				5CAF0C182109E470001A1AF3 /* Show.swift in Sources */,
 				5C924D9D210A7F0600A02CC1 /* ShowDetailsViewCell.swift in Sources */,
+				5CF2D0282112288500C0350D /* EpisodeCommentsViewController.swift in Sources */,
 				5C8721D7210A4175008A5ABE /* ShowDetailsViewController.swift in Sources */,
+				5C53E8722113426E008ED420 /* UIViewControllerExtension.swift in Sources */,
 				5C8721DD210A720C008A5ABE /* Episode.swift in Sources */,
 				5C8C9D32210718B400016FCF /* TitleTableViewCell.swift in Sources */,
 			);
