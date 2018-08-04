@@ -53,7 +53,12 @@ class AddEpisodeViewController: UIViewController {
     }
     
     @objc func didSelectAddShow() {
-        uploadImageOnAPI(token: token!, completion: {})
+        if image != nil {
+            uploadImageOnAPI(token: token!)
+        }else{
+            addEpisode()
+        }
+        
     }
     
     @IBAction func addEpisodeImage(_ sender: Any) {
@@ -74,7 +79,7 @@ class AddEpisodeViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func uploadImageOnAPI(token: String, completion: @escaping () -> ()) {
+    private func uploadImageOnAPI(token: String) {
         let headers = ["Authorization": token]
         
         let someUIImage = image!
@@ -90,23 +95,26 @@ class AddEpisodeViewController: UIViewController {
                method: .post,
                headers: headers)
             { [weak self] result in
+                
+                SVProgressHUD.dismiss()
                 switch result {
                 case .success(let uploadRequest, _, _):
                     self?.processUploadRequest(uploadRequest)
                 case .failure(let encodingError):
                     print(encodingError)
                 }
-               completion()
         }
-        
         
     }
     
-    func processUploadRequest(_ uploadRequest: UploadRequest) {
+    private func processUploadRequest(_ uploadRequest: UploadRequest) {
+        SVProgressHUD.show()
         uploadRequest
             .responseDecodableObject(keyPath: "data") {[weak self] (response:
                 DataResponse<Media>) in
         
+                SVProgressHUD.dismiss()
+                
         switch response.result {
 
             case .success(let media):
@@ -131,6 +139,8 @@ class AddEpisodeViewController: UIViewController {
             "episodeNumber": episodeNumberTextField.text!,
             "season": seasonNumberTextField.text!
         ]
+        
+        SVProgressHUD.show()
         
         Alamofire
             .request(Constants.URL.baseUrl + "/episodes",

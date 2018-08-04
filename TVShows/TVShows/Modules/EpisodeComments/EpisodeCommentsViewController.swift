@@ -178,7 +178,9 @@ class EpisodeCommentsViewController: UIViewController {
     
     @objc private func keyboardWasHidden(notification: NSNotification) {
         UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.viewBottomConstraint.constant = (self.originalBottomConstraintConstant)!
+            if self.originalBottomConstraintConstant != nil{
+                self.viewBottomConstraint.constant = self.originalBottomConstraintConstant!
+            }
         })
     }
 }
