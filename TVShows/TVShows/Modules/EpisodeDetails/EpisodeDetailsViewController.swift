@@ -22,18 +22,30 @@ class EpisodeDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        episodeTitleLabel.text = episode?.title
-        episodeNumberLabel.text = "S" + (episode?.season)! + " Ep" + (episode?.episodeNumber)!
-        episodeDescriptionLabel.text = episode?.description
         
-        let url = URL(string: Constants.URL.baseDomainUrl + episode!.imageUrl)
-        episodeImageView.kf.setImage(with: url)
+        setLabels()
+        setImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    private func setLabels(){
+        episodeTitleLabel.text = episode?.title
+        episodeNumberLabel.text = "S" + (episode?.season)! + " Ep" + (episode?.episodeNumber)!
+        episodeDescriptionLabel.text = episode?.description
+    }
+    
+    private func setImage(){
+        if episode!.imageUrl != ""{
+            let url = URL(string: Constants.URL.baseDomainUrl + episode!.imageUrl)
+            episodeImageView.kf.setImage(with: url)
+        }else{
+            episodeImageView.image = #imageLiteral(resourceName: "no_image_available")
+        }
     }
 
     @IBAction func returnToShowDetails(_ sender: Any) {
