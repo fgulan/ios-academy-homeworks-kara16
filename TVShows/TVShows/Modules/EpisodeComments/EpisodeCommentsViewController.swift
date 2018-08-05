@@ -15,6 +15,8 @@ class EpisodeCommentsViewController: UIViewController {
     var token: String?
     var episodeId: String?
     
+    private let emptyStateView = EmptyStateView.instanceFromNib()
+    
     private let refreshControl = UIRefreshControl()
     private var isRefreshing = false
     
@@ -203,15 +205,7 @@ extension EpisodeCommentsViewController: UITableViewDataSource {
             tableView.backgroundView = nil
         }
         else {
-            
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-
-            label.text             = "Sorry, we don't have comments yet. Be first to add a review."
-            label.numberOfLines    = 0
-            label.textColor        = UIColor.black
-            label.font = UIFont(name: label.font.fontName ,size: 31)
-            label.textAlignment    = .center
-            tableView.backgroundView = label
+            tableView.backgroundView = emptyStateView
             tableView.separatorStyle = .none
         }
         
