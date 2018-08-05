@@ -46,6 +46,25 @@ class AddEpisodeViewController: UIViewController {
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(didSelectAddShow))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= (keyboardSize.height - 35)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += (keyboardSize.height - 35)
+            }
+        }
     }
     
     @objc func didSelectCancel() {
@@ -171,13 +190,6 @@ extension AddEpisodeViewController: UIImagePickerControllerDelegate, UINavigatio
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             image = pickedImage
-            
-            
-//            if let asset = info[UIImagePickerControllerImageURL] as? URL {
-//                let str = asset.deletingPathExtension().lastPathComponent
-//
-//                print(asset.pathExtension + " " + str)
-//            }
             
         }
         
