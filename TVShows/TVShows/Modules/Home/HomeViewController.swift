@@ -1,3 +1,4 @@
+
 //
 //  HomeViewController.swift
 //  TVShows
@@ -12,31 +13,35 @@ import SVProgressHUD
 class HomeViewController: UIViewController{
     var loginUser: LoginData?
     private var shows: [Show] = []
+    private var isCollectionViewEnabled = true
     
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet var collectionView: UICollectionView! {
         didSet {
-            tableView.delegate = self
-            tableView.dataSource = self
+            collectionView.delegate = self
+            collectionView.dataSource = self
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-          getShows()
         
-        let logoutItem = UIBarButtonItem.init(image: UIImage(named:
-            "ic-logout"),
-                                              style: .plain,
-                                              target: self,
-                                              action: #selector(_logoutActionHandler))
+        navigationItem.title = "Shows"
         
-        navigationItem.leftBarButtonItem = logoutItem
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "ic-logout"),
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(_logoutActionHandler))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "ic-listview"),
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(_changeView))
+        
+        getShows()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        navigationItem.title = "Shows"
     }
     
     @objc private func _logoutActionHandler() {
@@ -48,6 +53,18 @@ class HomeViewController: UIViewController{
         goToLoginScreen()
     }
     
+    @objc private func _changeView() {
+        if isCollectionViewEnabled{
+            navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "ic-gridview")
+            isCollectionViewEnabled = false
+        }else{
+            navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "ic-listview")
+            isCollectionViewEnabled = true
+        }
+        
+        collectionView.reloadData()
+    }
+    
     private func goToLoginScreen(){
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let loginViewController =
@@ -56,7 +73,7 @@ class HomeViewController: UIViewController{
         navigationController?.setViewControllers([loginViewController],
                                                  animated: true)
     }
-
+    
     private func getShows(){
         let token: String = loginUser!.token
         let headers = ["Authorization": token]
@@ -72,12 +89,12 @@ class HomeViewController: UIViewController{
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {[weak self] (response:
                 DataResponse<[Show]>) in
                 
-        SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 
                 switch response.result {
                 case .success(let shows):
                     self?.shows = shows
-                    self?.tableView.reloadData()
+                    self?.collectionView.reloadData()
                 case .failure:
                     print("Fail")
                 }
@@ -85,61 +102,71 @@ class HomeViewController: UIViewController{
     }
 }
 
-    extension HomeViewController: UITableViewDelegate {
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let show = shows[indexPath.row]
-            
-            jumpToShowDetails(show: show)
-            
-            tableView.deselectRow(at: indexPath, animated: false)
-        }
-        
-        private func jumpToShowDetails(show: Show){
-            let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
-            let detailsViewController = storyboard.instantiateViewController(
-                withIdentifier: "ShowDetailsViewController"
-                ) as! ShowDetailsViewController
-            
-            detailsViewController.token = loginUser?.token
-            detailsViewController.showId = show.id
-            
-            
-            let navigationController = UINavigationController(rootViewController:
-                detailsViewController)
-            present(navigationController, animated: true, completion: nil)
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if isCollectionViewEnabled{
+            return CGSize(width: view.frame.width / 2.2, height: view.frame.height / 3)
+        }else{
+            return CGSize(width: view.frame.width, height: view.frame.height / 3)
         }
         
     }
     
-    extension HomeViewController: UITableViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let show = shows[indexPath.row]
         
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            let cellDefaultHeight = CGFloat(160) /*the default height of the cell*/;
-            let screenDefaultHeight = CGFloat(480)/*the default height of the screen i.e. 480 in iPhone 4*/;
-            
-            let factor = cellDefaultHeight/screenDefaultHeight
-            
-            return factor * (tableView.bounds.size.height)
-        }
+        jumpToShowDetails(show: show)
         
-        func numberOfSections(in tableView: UITableView) -> Int {
-          return 1
-        }
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+    private func jumpToShowDetails(show: Show){
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let detailsViewController = storyboard.instantiateViewController(
+            withIdentifier: "ShowDetailsViewController"
+            ) as! ShowDetailsViewController
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return shows.count
-        }
+        detailsViewController.token = loginUser?.token
+        detailsViewController.showId = show.id
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell: TitleTableViewCell = tableView.dequeueReusableCell(
-                withIdentifier: "TitleTableViewCell",
-                for: indexPath
-                ) as! TitleTableViewCell
+        
+        let navigationController = UINavigationController(rootViewController:
+            detailsViewController)
+        present(navigationController, animated: true, completion: nil)
+    }
+}
 
-            let show = shows[indexPath.row]
+extension HomeViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return shows.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+        let show = shows[indexPath.row]
+        
+        if isCollectionViewEnabled{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell",
+                                                     for: indexPath) as! CollectionViewCell
             cell.configureWith(show: show)
-           
+            
+            return cell
+            
+        }else{
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCollectionViewCell",
+                                                      for: indexPath) as! ListCollectionViewCell
+            cell.configureWith(show: show)
+            
             return cell
         }
+
     }
+}
+
