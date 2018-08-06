@@ -149,10 +149,10 @@
                         <viewLayoutGuide key="safeArea" id="xab-Hl-abz"/>
                     </view>
                     <connections>
-                        <outlet property="episodeDescriptionTextField" destination="LcH-JE-hwH" id="6NN-IU-0Hg"/>
-                        <outlet property="episodeNumberTextField" destination="haf-wO-xq9" id="n4J-cO-7cU"/>
-                        <outlet property="episodeTitleTextField" destination="qrN-e3-bed" id="vPY-E9-uPF"/>
-                        <outlet property="seasonNumberTextField" destination="Sxm-3p-a4X" id="4sp-S8-mkW"/>
+                        <outlet property="_episodeDescriptionTextField" destination="LcH-JE-hwH" id="6g0-5o-xfS"/>
+                        <outlet property="_episodeNumberTextField" destination="haf-wO-xq9" id="hpH-ob-TKJ"/>
+                        <outlet property="_episodeTitleTextField" destination="qrN-e3-bed" id="tMi-fH-F9R"/>
+                        <outlet property="_seasonNumberTextField" destination="Sxm-3p-a4X" id="YQI-cm-zbV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbe-AJ-vAO" userLabel="First Responder" sceneMemberID="firstResponder"/>

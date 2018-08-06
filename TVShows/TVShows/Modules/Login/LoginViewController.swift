@@ -12,15 +12,20 @@ import Alamofire
 import CodableAlamofire
 
 class LoginViewController: UIViewController {
-    private var checked = false
-    private var user: User?
-    private var loginUser: LoginData?
     
-    @IBOutlet weak var eMailField: UITextField!
+    //    MARK: - Private properties
     
-    @IBOutlet weak var passwordField: UITextField!
+    private var _checked = false
+    private var _user: User?
+    private var _loginUser: LoginData?
     
-    @IBOutlet weak var checkboxButton: UIButton!
+    //    MARK: - IBOutlets
+    
+    @IBOutlet private weak var _eMailField: UITextField!
+    @IBOutlet private weak var _passwordField: UITextField!
+    @IBOutlet private weak var _checkboxButton: UIButton!
+    
+    //    MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,47 +35,61 @@ class LoginViewController: UIViewController {
         if let email = UserDefaults.standard.value(forKey: "email") as? String,
            let password = UserDefaults.standard.value(forKey: "password") as? String {
             
-            eMailField.text = email
-            passwordField.text = password
-            checkBoxChanged(checkboxButton)
+            _eMailField.text = email
+            _passwordField.text = password
+            checkBoxChanged(_checkboxButton)
             
             loginUserWith(email: email, password: password)
         }
     }
     
+    //    MARK: - IBActions
+    
     @IBAction func createAccountPushHome(_ sender: Any) {
-        if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
-           registerUserWith(email: eMailField.text!, password: passwordField.text!)
+        if let email = _eMailField.text, let password = _passwordField.text, !email.isEmpty, !password.isEmpty {
+           registerUserWith(email: _eMailField.text!, password: _passwordField.text!)
         }else{
-            if eMailField.text!.isEmpty{
-                eMailField.shake()
+            if _eMailField.text!.isEmpty{
+                _eMailField.shake()
             }
             
-            if passwordField.text!.isEmpty{
-                passwordField.shake()
+            if _passwordField.text!.isEmpty{
+                _passwordField.shake()
             }
         }
     }
     
     @IBAction func logInPushHome(_ sender: Any) {
         
-        if let email = eMailField.text, let password = passwordField.text, !email.isEmpty, !password.isEmpty {
-            if checkboxButton.isSelected{
+        if let email = _eMailField.text, let password = _passwordField.text, !email.isEmpty, !password.isEmpty {
+            if _checkboxButton.isSelected{
                 saveUser(email: email, password: password)
             }
             
-            loginUserWith(email: eMailField.text!, password: passwordField.text!)
+            loginUserWith(email: _eMailField.text!, password: _passwordField.text!)
         }else{
-            if eMailField.text!.isEmpty{
-                eMailField.shake()
+            if _eMailField.text!.isEmpty{
+                _eMailField.shake()
             }
             
-            if passwordField.text!.isEmpty{
-                passwordField.shake()
+            if _passwordField.text!.isEmpty{
+                _passwordField.shake()
             }
         }
-       
     }
+    
+    @IBAction func checkBoxChanged(_ sender: UIButton) {
+        
+        sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected {
+            _checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
+        }else {
+            _checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
+        }
+    }
+    
+    //    MARK: - Private methods -
     
     private func saveUser(email: String, password: String){
         UserDefaults.standard.setValue(email, forKey: "email")
@@ -89,7 +108,7 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let viewControllerD =
             storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        viewControllerD.loginUser = self.loginUser
+        viewControllerD.loginUser = self._loginUser
         navigationController?.setViewControllers([viewControllerD], animated: true)
     }
     
@@ -114,7 +133,7 @@ class LoginViewController: UIViewController {
                 
         switch response.result {
         case .success(let loginUser):
-                self?.loginUser = loginUser
+                self?._loginUser = loginUser
                 self?.pushHome()
         case .failure:
             self?.showAlert(alertMessage: "Invalid username or password.")
@@ -143,9 +162,9 @@ class LoginViewController: UIViewController {
                 
                 switch response.result {
                 case .success(let user):
-                    self?.user = user
+                    self?._user = user
                     
-                   if let _: Bool = self?.checkboxButton.isSelected {
+                   if let _: Bool = self?._checkboxButton.isSelected {
                         self?.saveUser(email: email, password: password)
                     }
                     
@@ -153,19 +172,6 @@ class LoginViewController: UIViewController {
                 case .failure:
                     self?.showAlert(alertMessage: "Cannot register user with the given data.")
                 }
-        }
-        
-        
-    }
-    
-    @IBAction func checkBoxChanged(_ sender: UIButton) {
-        
-        sender.isSelected = !sender.isSelected
-        
-        if sender.isSelected {
-            checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-filled"), for: UIControlState())
-        }else {
-            checkboxButton.setImage(#imageLiteral(resourceName: "ic-checkbox-empty"), for: UIControlState())
         }
     }
 }

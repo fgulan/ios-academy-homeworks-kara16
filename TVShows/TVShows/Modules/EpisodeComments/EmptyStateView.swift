@@ -10,6 +10,8 @@ import UIKit
 
 class EmptyStateView: UIView {
 
+    //    MARK: - Public methods (class)
+    
     class func instanceFromNib() -> EmptyStateView{
         return UINib(nibName: "View", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EmptyStateView
     }

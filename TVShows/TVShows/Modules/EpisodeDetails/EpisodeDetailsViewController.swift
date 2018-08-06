@@ -11,15 +11,19 @@ import Kingfisher
 import SVProgressHUD
 
 class EpisodeDetailsViewController: UIViewController {
-
-    @IBOutlet weak var episodeImageView: UIImageView!
-    @IBOutlet weak var episodeTitleLabel: UILabel!
-    @IBOutlet weak var episodeNumberLabel: UILabel!
-    @IBOutlet weak var episodeDescriptionLabel: UILabel!
+    //    MARK: - Public properties
     
     var episode: Episode?
     var token: String?
     
+    //    MARK: - IBOutlets
+    
+    @IBOutlet private weak var _episodeImageView: UIImageView!
+    @IBOutlet private weak var _episodeTitleLabel: UILabel!
+    @IBOutlet private weak var _episodeNumberLabel: UILabel!
+    @IBOutlet private weak var _episodeDescriptionLabel: UILabel!
+    
+    //    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,21 +37,7 @@ class EpisodeDetailsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    private func setLabels(){
-        episodeTitleLabel.text = episode?.title
-        episodeNumberLabel.text = "S" + (episode?.season)! + " Ep" + (episode?.episodeNumber)!
-        episodeDescriptionLabel.text = episode?.description
-    }
-    
-    private func setImage(){
-        if episode!.imageUrl != ""{
-            let url = URL(string: Constants.URL.baseDomainUrl + episode!.imageUrl)
-            episodeImageView.kf.setImage(with: url)
-        }else{
-            episodeImageView.image = #imageLiteral(resourceName: "no_image_available")
-        }
-    }
-
+    //    MARK: - IBActions
     @IBAction func returnToShowDetails(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -65,4 +55,23 @@ class EpisodeDetailsViewController: UIViewController {
             episodeCommentsViewController)
         present(navigationController, animated: true, completion: nil)
     }
+    
+    //    MARK: - Private methods
+    
+    private func setLabels(){
+        _episodeTitleLabel.text = episode?.title
+        _episodeNumberLabel.text = "S" + (episode?.season)! + " Ep" + (episode?.episodeNumber)!
+        _episodeDescriptionLabel.text = episode?.description
+    }
+    
+    private func setImage(){
+        if episode!.imageUrl != ""{
+            let url = URL(string: Constants.URL.baseDomainUrl + episode!.imageUrl)
+            _episodeImageView.kf.setImage(with: url)
+        }else{
+            _episodeImageView.image = #imageLiteral(resourceName: "no_image_available")
+        }
+    }
+
+    
 }

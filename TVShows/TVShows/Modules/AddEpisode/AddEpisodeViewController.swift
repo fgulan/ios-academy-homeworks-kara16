@@ -16,20 +16,31 @@ protocol AddNewEpisodeDelegate: class {
 }
 
 class AddEpisodeViewController: UIViewController {
-    weak var delegate: AddNewEpisodeDelegate?
-    
-    private var imagePicker = UIImagePickerController()
-    private var mediaId = ""
-    private var image: UIImage?
+    //    MARK: - Public properties
     
     var showId: String?
     var token: String?
+    
+    //    MARK: - Private properties
+    
+    private var _imagePicker = UIImagePickerController()
+    private var _mediaId = ""
+    private var _image: UIImage?
+    
+    
 
-    @IBOutlet weak var episodeTitleTextField: UITextField!
-    @IBOutlet weak var seasonNumberTextField: UITextField!
-    @IBOutlet weak var episodeNumberTextField: UITextField!
-    @IBOutlet weak var episodeDescriptionTextField: UITextField!
+    //    MARK: - IBOutlets
+    
+    @IBOutlet private weak var _episodeTitleTextField: UITextField!
+    @IBOutlet private weak var _seasonNumberTextField: UITextField!
+    @IBOutlet private weak var _episodeNumberTextField: UITextField!
+    @IBOutlet private weak var _episodeDescriptionTextField: UITextField!
+    
+    //    MARK: - Delegators
+    
+    weak var delegate: AddNewEpisodeDelegate?
    
+    //    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,44 +62,18 @@ class AddEpisodeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= (keyboardSize.height - 35)
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += (keyboardSize.height - 35)
-            }
-        }
-    }
-    
-    @objc func didSelectCancel() {
-        self.dismiss(animated: false)
-    }
-    
-    @objc func didSelectAddShow() {
-        if image != nil {
-            uploadImageOnAPI(token: token!)
-        }else{
-            addEpisode()
-        }
-        
-    }
-    
+    //    MARK: - IBActions
     @IBAction func addEpisodeImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
-            imagePicker.delegate = self
-            imagePicker.sourceType = .savedPhotosAlbum;
-            imagePicker.allowsEditing = false
+            _imagePicker.delegate = self
+            _imagePicker.sourceType = .savedPhotosAlbum;
+            _imagePicker.allowsEditing = false
             
-            self.present(imagePicker, animated: true, completion: nil)
+            self.present(_imagePicker, animated: true, completion: nil)
         }
     }
+    
+    //    MARK: - Private methods
     
     private func showAlert(alertMessage: String) {
         let alertController = UIAlertController(title: "Alert", message:
@@ -101,7 +86,7 @@ class AddEpisodeViewController: UIViewController {
     private func uploadImageOnAPI(token: String) {
         let headers = ["Authorization": token]
         
-        let someUIImage = image!
+        let someUIImage = _image!
         let imageByteData = UIImagePNGRepresentation(someUIImage)!
          SVProgressHUD.show()
         Alamofire
@@ -137,7 +122,7 @@ class AddEpisodeViewController: UIViewController {
         switch response.result {
 
             case .success(let media):
-                self?.mediaId = media.id
+                self?._mediaId = media.id
             self?.addEpisode()
             case .failure(let error):
                 print("FAILURE: \(error)")
@@ -152,11 +137,11 @@ class AddEpisodeViewController: UIViewController {
         
         let parameters: [String: String] = [
             "showId": showId!,
-            "mediaId": mediaId,
-            "title": episodeTitleTextField.text!,
-            "description": episodeDescriptionTextField.text!,
-            "episodeNumber": episodeNumberTextField.text!,
-            "season": seasonNumberTextField.text!
+            "mediaId": _mediaId,
+            "title": _episodeTitleTextField.text!,
+            "description": _episodeDescriptionTextField.text!,
+            "episodeNumber": _episodeNumberTextField.text!,
+            "season": _seasonNumberTextField.text!
         ]
         
         SVProgressHUD.show()
@@ -183,13 +168,46 @@ class AddEpisodeViewController: UIViewController {
                 }
         }
     }
+    
+    //    MARK: - Private methods (objc)
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= (keyboardSize.height - 35)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += (keyboardSize.height - 35)
+            }
+        }
+    }
+    
+    @objc func didSelectCancel() {
+        self.dismiss(animated: false)
+    }
+    
+    @objc func didSelectAddShow() {
+        if _image != nil {
+            uploadImageOnAPI(token: token!)
+        }else{
+            addEpisode()
+        }
+        
+    }
 }
+
+//    MARK: - Extensions
 
 extension AddEpisodeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            image = pickedImage
+            _image = pickedImage
             
         }
         

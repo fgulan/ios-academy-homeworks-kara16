@@ -38,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KfG-Yh-aYM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="238" height="195"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="239" height="195"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -49,7 +49,7 @@
                                             <constraint firstItem="KfG-Yh-aYM" firstAttribute="top" secondItem="Ekd-qd-o3n" secondAttribute="top" id="sqW-cB-A1B"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="imageView" destination="KfG-Yh-aYM" id="vKk-Ee-ktJ"/>
+                                            <outlet property="_imageView" destination="KfG-Yh-aYM" id="hev-ng-nQT"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ListCollectionViewCell" id="2kj-MN-CiH" customClass="ListCollectionViewCell" customModule="TVShows" customModuleProvider="target">
@@ -81,8 +81,8 @@
                                             <constraint firstItem="7KV-eg-5LI" firstAttribute="leading" secondItem="2kj-MN-CiH" secondAttribute="leadingMargin" id="orV-il-ESW"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="showImageView" destination="7KV-eg-5LI" id="AXW-mA-fGr"/>
-                                            <outlet property="showTitleLabel" destination="bub-rC-e8d" id="GYv-aZ-gqA"/>
+                                            <outlet property="_showImageView" destination="7KV-eg-5LI" id="zMb-mP-pbn"/>
+                                            <outlet property="_showTitleLabel" destination="bub-rC-e8d" id="cnX-g8-ed1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -99,7 +99,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2U9-8t-x2e"/>
                     <connections>
-                        <outlet property="collectionView" destination="eJL-cr-QJf" id="BWd-Pd-oHh"/>
+                        <outlet property="_collectionView" destination="eJL-cr-QJf" id="Kd1-vS-KF8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXy-2O-vld" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,7 +14,7 @@
         <!--Episode Details View Controller-->
         <scene sceneID="QQJ-DC-Igz">
             <objects>
-                <viewController storyboardIdentifier="EpisodeDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2yb-Dg-qeV" customClass="EpisodeDetailsViewController" customModule="TVShow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EpisodeDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2yb-Dg-qeV" customClass="EpisodeDetailsViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QIt-HK-fGE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -134,10 +134,10 @@
                         <viewLayoutGuide key="safeArea" id="q2K-tf-dsC"/>
                     </view>
                     <connections>
-                        <outlet property="episodeDescriptionLabel" destination="Pav-0c-Wjf" id="nUr-Ep-Yy3"/>
-                        <outlet property="episodeImageView" destination="JCe-2R-C8c" id="n56-cb-WaQ"/>
-                        <outlet property="episodeNumberLabel" destination="574-UP-UTD" id="nsq-w9-21W"/>
-                        <outlet property="episodeTitleLabel" destination="Ce9-97-9Sy" id="jib-K3-PBo"/>
+                        <outlet property="_episodeDescriptionLabel" destination="Pav-0c-Wjf" id="8ff-C4-TCw"/>
+                        <outlet property="_episodeImageView" destination="JCe-2R-C8c" id="rfl-UV-XkD"/>
+                        <outlet property="_episodeNumberLabel" destination="574-UP-UTD" id="oVR-Rm-oX8"/>
+                        <outlet property="_episodeTitleLabel" destination="Ce9-97-9Sy" id="rw7-2z-8IR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLY-rg-BY8" userLabel="First Responder" sceneMemberID="firstResponder"/>

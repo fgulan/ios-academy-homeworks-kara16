@@ -12,38 +12,40 @@ import SVProgressHUD
 
 class EpisodeCommentsViewController: UIViewController {
     
+    //    MARK: - Public properties
     var token: String?
     var episodeId: String?
     
-    private let emptyStateView = EmptyStateView.instanceFromNib()
+    //    MARK: - Private properties
     
-    private let refreshControl = UIRefreshControl()
-    private var isRefreshing = false
+    private let _emptyStateView = EmptyStateView.instanceFromNib()
+    private var _originalBottomConstraintConstant: CGFloat?
     
-    private var comments: [Comment] = []
+    private let _refreshControl = UIRefreshControl()
+    private var _isRefreshing = false
     
-    @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
-    var originalBottomConstraintConstant: CGFloat?
+    private var _comments: [Comment] = []
     
-    @IBOutlet weak var postCommentView: UIView!
+    //    MARK: - IBOutlets
     
-    @IBOutlet weak var addCommentField: UITextField!
-    @IBOutlet weak var tableView: UITableView!{
+    @IBOutlet private weak var _viewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var _postCommentView: UIView!
+    
+    @IBOutlet private weak var _addCommentField: UITextField!
+    @IBOutlet private weak var _tableView: UITableView!{
         didSet{
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.refreshControl = refreshControl
+            _tableView.delegate = self
+            _tableView.dataSource = self
+            _tableView.refreshControl = _refreshControl
             
-            refreshControl.addTarget(self, action: #selector(refreshComments), for: .valueChanged)
-            refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-            refreshControl.attributedTitle = NSAttributedString(string: "Refreshing comments ...")
+            _refreshControl.addTarget(self, action: #selector(refreshComments), for: .valueChanged)
+            _refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+            _refreshControl.attributedTitle = NSAttributedString(string: "Refreshing comments ...")
         }
     }
     
-    @objc func refreshComments(){
-        isRefreshing = true
-        getComments()
-    }
+    //    MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,7 @@ class EpisodeCommentsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasHidden), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
         
-        postCommentView.layer.borderColor = UIColor.lightGray.cgColor
+        _postCommentView.layer.borderColor = UIColor.lightGray.cgColor
         
         getComments()
     }
@@ -72,9 +74,18 @@ class EpisodeCommentsViewController: UIViewController {
         
     }
     
-    @objc func didSelectBackButton() {
-       self.dismiss(animated: false)
+    
+    //    MARK: - IBActions
+    
+    @IBAction func postComment(_ sender: Any) {
+        if _addCommentField.text!.isEmpty {
+            _addCommentField.shake()
+        }else{
+            uploadComment(text: _addCommentField.text!)
+        }
     }
+    
+   //    MARK: - Private methods
     
     private func getComments(){
         let token: String = self.token!
@@ -95,12 +106,12 @@ class EpisodeCommentsViewController: UIViewController {
                 
                 switch response.result {
                 case .success(let comments):
-                    self?.comments = comments
-                    self?.tableView.reloadData()
+                    self?._comments = comments
+                    self?._tableView.reloadData()
                     
-                    if  self!.isRefreshing {
-                        self?.refreshControl.endRefreshing()
-                        self?.isRefreshing = false
+                    if  self!._isRefreshing {
+                        self?._refreshControl.endRefreshing()
+                        self?._isRefreshing = false
                     }
                     
                 case .failure:
@@ -110,37 +121,12 @@ class EpisodeCommentsViewController: UIViewController {
         
     }
     
-    private func setTableViewBackground(){
-        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-        
-        let messageLabel = UILabel(frame: rect)
-        messageLabel.text = "Sorry, we don't have comments yet. Be first who will write a review."
-        messageLabel.numberOfLines = 0
-        
-        messageLabel.textColor = UIColor.black
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = .center;
-        messageLabel.font = UIFont(name: "TrebuchetMS", size: 18)
-        messageLabel.sizeToFit()
-        
-        tableView.backgroundView = messageLabel;
-        tableView.separatorStyle = .none;
-    }
-
-    @IBAction func postComment(_ sender: Any) {
-        if addCommentField.text!.isEmpty {
-            addCommentField.shake()
-        }else{
-            uploadComment(text: addCommentField.text!)
-        }
-    }
-    
     private func uploadComment(text: String){
         let token: String = self.token!
         let headers = ["Authorization": token]
         
         let parameters: [String: String] = [
-            "text": addCommentField.text!,
+            "text": _addCommentField.text!,
             "episodeId": episodeId!
         ]
         
@@ -159,7 +145,7 @@ class EpisodeCommentsViewController: UIViewController {
                 
                 switch response.result {
                 case .success:
-                    self?.addCommentField.text = ""
+                    self?._addCommentField.text = ""
                     self?.getComments()
                 case .failure:
                     print("Fail")
@@ -167,25 +153,37 @@ class EpisodeCommentsViewController: UIViewController {
         }
     }
     
+    //    MARK: - Private methods (objc)
+    
+    @objc func refreshComments(){
+        _isRefreshing = true
+        getComments()
+    }
+    
+    @objc func didSelectBackButton() {
+        self.dismiss(animated: false)
+    }
     
     @objc private func keyboardWasShown(notification: NSNotification) {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.originalBottomConstraintConstant = self.viewBottomConstraint.constant
-            self.viewBottomConstraint.constant = keyboardFrame.size.height
+            self._originalBottomConstraintConstant = self._viewBottomConstraint.constant
+            self._viewBottomConstraint.constant = keyboardFrame.size.height
         })
     }
     
     @objc private func keyboardWasHidden(notification: NSNotification) {
         UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            if self.originalBottomConstraintConstant != nil{
-                self.viewBottomConstraint.constant = self.originalBottomConstraintConstant!
+            if self._originalBottomConstraintConstant != nil{
+                self._viewBottomConstraint.constant = self._originalBottomConstraintConstant!
             }
         })
     }
 }
+
+ //    MARK: - Extensions
 
 extension EpisodeCommentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -199,13 +197,13 @@ extension EpisodeCommentsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSections: Int = 0
         
-        if comments.count != 0 {
+        if _comments.count != 0 {
             tableView.separatorStyle = .singleLine
             numOfSections            = 1
             tableView.backgroundView = nil
         }
         else {
-            tableView.backgroundView = emptyStateView
+            tableView.backgroundView = _emptyStateView
             tableView.separatorStyle = .none
         }
         
@@ -213,7 +211,7 @@ extension EpisodeCommentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments.count
+        return _comments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -222,7 +220,7 @@ extension EpisodeCommentsViewController: UITableViewDataSource {
             for: indexPath
             ) as! EpisodeCommentTableViewCell
         
-        let comment = comments[indexPath.row]
+        let comment = _comments[indexPath.row]
         let image = chooseImage(commentsNumber: indexPath.row)
         cell.configureWith(comment: comment,image: image)
         

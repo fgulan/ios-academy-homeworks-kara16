@@ -11,36 +11,37 @@ import SVProgressHUD
 import Alamofire
 
 class ShowDetailsViewController: UIViewController {
+    //    MARK: - Public properties
+    
     var token: String?
     var showId: String?
     
-    private let refreshControl = UIRefreshControl()
-    private var isRefreshing = false
+    //    MARK: - Private properties
     
+    private let _refreshControl = UIRefreshControl()
+    private var _isRefreshing = false
     private var episodes: [Episode] = []
     
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var episodesNumberLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    //    MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: UITableView!{
+    @IBOutlet private weak var _coverImageView: UIImageView!
+    @IBOutlet private weak var _episodesNumberLabel: UILabel!
+    @IBOutlet private weak var _titleLabel: UILabel!
+    @IBOutlet private weak var _descriptionLabel: UILabel!
+    
+    @IBOutlet private weak var _tableView: UITableView!{
         didSet {
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.refreshControl = refreshControl
+            _tableView.delegate = self
+            _tableView.dataSource = self
+            _tableView.refreshControl = _refreshControl
             
-            refreshControl.addTarget(self, action: #selector(refreshEpisodes), for: .valueChanged)
-            refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-            refreshControl.attributedTitle = NSAttributedString(string: "Refreshing episodes...")
+            _refreshControl.addTarget(self, action: #selector(refreshEpisodes), for: .valueChanged)
+            _refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+            _refreshControl.attributedTitle = NSAttributedString(string: "Refreshing episodes...")
         }
     }
     
-    @objc func refreshEpisodes(){
-        isRefreshing = true
-        getShowEpisodes()
-    }
-    
+    //    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -49,11 +50,7 @@ class ShowDetailsViewController: UIViewController {
         getShowEpisodes()
     }
     
-    private func getCoverImage(imageUrl: String){
-        let url = URL(string: Constants.URL.baseDomainUrl + imageUrl)
-        coverImageView.kf.setImage(with: url)
-    }
-    
+    //    MARK: - IBActions
     @IBAction func navigateback(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -70,6 +67,13 @@ class ShowDetailsViewController: UIViewController {
         let navigationController = UINavigationController.init(rootViewController:
             addEpisodeViewController)
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    //    MARK: - Private methods
+    
+    private func getCoverImage(imageUrl: String){
+        let url = URL(string: Constants.URL.baseDomainUrl + imageUrl)
+        _coverImageView.kf.setImage(with: url)
     }
     
     private func getShowInfo(){
@@ -91,8 +95,8 @@ class ShowDetailsViewController: UIViewController {
                 
                 switch response.result {
                 case .success(let showDetails):
-                    self?.titleLabel.text = showDetails.title
-                    self?.descriptionLabel.text = showDetails.description
+                    self?._titleLabel.text = showDetails.title
+                    self?._descriptionLabel.text = showDetails.description
                     self?.getCoverImage(imageUrl: showDetails.imageUrl)
                 case .failure:
                     print("Fail")
@@ -121,19 +125,29 @@ class ShowDetailsViewController: UIViewController {
                 switch response.result {
                 case .success(let episodes):
                     self?.episodes = episodes
-                    self?.tableView.reloadData()
-                    self?.episodesNumberLabel.text = "Episodes " + String(episodes.count)
+                    self?._tableView.reloadData()
+                    self?._episodesNumberLabel.text = "Episodes " + String(episodes.count)
                     
-                    if self!.isRefreshing {
-                        self?.refreshControl.endRefreshing()
-                        self?.isRefreshing = false
+                    if self!._isRefreshing {
+                        self?._refreshControl.endRefreshing()
+                        self?._isRefreshing = false
                     }
                 case .failure(let error):
                     print(error)
                 }
         }
     }
+    
+    
+    //    MARK: - Private methods (objc)
+    
+    @objc func refreshEpisodes(){
+        _isRefreshing = true
+        getShowEpisodes()
+    }
 }
+
+//    MARK: - Extensions
 
 extension ShowDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -185,7 +199,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
 extension ShowDetailsViewController: AddNewEpisodeDelegate {
     func shouldReloadEpisodes(episode: Episode) {
         episodes.append(episode)
-        episodesNumberLabel.text = "Episodes " + String(episodes.count)
-        tableView.reloadData()
+        _episodesNumberLabel.text = "Episodes " + String(episodes.count)
+        _tableView.reloadData()
     }
 }

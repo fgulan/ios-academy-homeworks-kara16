@@ -171,9 +171,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="4iA-Jc-omh"/>
                     <connections>
-                        <outlet property="checkboxButton" destination="gTh-LQ-QKo" id="CBn-xA-DNi"/>
-                        <outlet property="eMailField" destination="m17-2I-dBM" id="oAy-2D-IQo"/>
-                        <outlet property="passwordField" destination="IXj-oE-ic1" id="ZwS-fJ-wbD"/>
+                        <outlet property="_checkboxButton" destination="gTh-LQ-QKo" id="8ZN-a6-Ff9"/>
+                        <outlet property="_eMailField" destination="m17-2I-dBM" id="QSI-f1-Jtg"/>
+                        <outlet property="_passwordField" destination="IXj-oE-ic1" id="bC2-gI-ZgD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3j-cn-jdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,11 +10,14 @@ import UIKit
 import Kingfisher
 
 class CollectionViewCell: UICollectionViewCell {
+    //    MARK: - IBOutlets
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private weak var _imageView: UIImageView!
+    
+    //    MARK: - Public methods
     
     func configureWith(show: Show){
         let url = URL(string: "https://api.infinum.academy" + show.imageUrl)
-        imageView.kf.setImage(with: url)
+        _imageView.kf.setImage(with: url)
     }
 }

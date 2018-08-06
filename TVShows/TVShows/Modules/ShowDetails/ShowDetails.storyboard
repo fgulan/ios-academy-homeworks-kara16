@@ -119,8 +119,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="episodeNumberLabel" destination="2Io-zs-uMg" id="NK6-lv-ujA"/>
-                                            <outlet property="episodeTitleLabel" destination="RRs-q4-PeM" id="Yl1-yQ-fCl"/>
+                                            <outlet property="_episodeNumberLabel" destination="2Io-zs-uMg" id="M23-03-xYM"/>
+                                            <outlet property="_episodeTitleLabel" destination="RRs-q4-PeM" id="bw8-u9-gxq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -181,11 +181,11 @@
                         <viewLayoutGuide key="safeArea" id="5rj-ad-DuQ"/>
                     </view>
                     <connections>
-                        <outlet property="coverImageView" destination="Jxg-8P-65r" id="Y63-03-wN4"/>
-                        <outlet property="descriptionLabel" destination="HZH-Iw-sOK" id="lL7-G7-yQ1"/>
-                        <outlet property="episodesNumberLabel" destination="XUs-DZ-a7r" id="Alm-0o-Jq6"/>
-                        <outlet property="tableView" destination="R9t-aE-uyl" id="jTW-kh-9gM"/>
-                        <outlet property="titleLabel" destination="PsU-PV-Hkd" id="hH7-1S-eqR"/>
+                        <outlet property="_coverImageView" destination="Jxg-8P-65r" id="p7J-Bd-J6t"/>
+                        <outlet property="_descriptionLabel" destination="HZH-Iw-sOK" id="Bvd-ej-4lt"/>
+                        <outlet property="_episodesNumberLabel" destination="XUs-DZ-a7r" id="KCP-US-I4J"/>
+                        <outlet property="_tableView" destination="R9t-aE-uyl" id="Her-Wy-E1l"/>
+                        <outlet property="_titleLabel" destination="PsU-PV-Hkd" id="p2E-Im-WeI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xQ-xq-PkX" userLabel="First Responder" sceneMemberID="firstResponder"/>

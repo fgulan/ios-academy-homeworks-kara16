@@ -62,9 +62,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="commentImageView" destination="MrZ-km-2V6" id="je4-zK-0CG"/>
-                                            <outlet property="commentLabel" destination="Toz-8F-nBM" id="IDx-ef-rl9"/>
-                                            <outlet property="userLabel" destination="6Qv-1A-Y7v" id="4RM-aP-RKl"/>
+                                            <outlet property="_commentImageView" destination="MrZ-km-2V6" id="YRM-IO-fOj"/>
+                                            <outlet property="_commentLabel" destination="Toz-8F-nBM" id="9pE-RB-Daf"/>
+                                            <outlet property="_userLabel" destination="6Qv-1A-Y7v" id="BAd-nJ-PaJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -127,10 +127,10 @@
                         <viewLayoutGuide key="safeArea" id="7RT-JW-Nzp"/>
                     </view>
                     <connections>
-                        <outlet property="addCommentField" destination="h0t-Ng-68q" id="ab4-Es-DYn"/>
-                        <outlet property="postCommentView" destination="VvW-k5-CrY" id="UdD-gc-ebT"/>
-                        <outlet property="tableView" destination="bTQ-0O-CpB" id="MRs-YN-WbG"/>
-                        <outlet property="viewBottomConstraint" destination="A7r-1r-8yx" id="ErQ-eV-kOl"/>
+                        <outlet property="_addCommentField" destination="h0t-Ng-68q" id="wam-RY-uwe"/>
+                        <outlet property="_postCommentView" destination="VvW-k5-CrY" id="8T4-Dx-oJL"/>
+                        <outlet property="_tableView" destination="bTQ-0O-CpB" id="gA5-A7-ieh"/>
+                        <outlet property="_viewBottomConstraint" destination="A7r-1r-8yx" id="z7g-AS-w6Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yv-ji-Gdf" userLabel="First Responder" sceneMemberID="firstResponder"/>

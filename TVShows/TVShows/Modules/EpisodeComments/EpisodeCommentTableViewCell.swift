@@ -10,14 +10,18 @@ import UIKit
 
 class EpisodeCommentTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
-    @IBOutlet weak var commentImageView: UIImageView!
+    //    MARK: - IBOutlets
+    
+    @IBOutlet private weak var _userLabel: UILabel!
+    @IBOutlet private weak var _commentLabel: UILabel!
+    @IBOutlet private weak var _commentImageView: UIImageView!
+    
+    //    MARK: - Public methods
     
     func configureWith(comment: Comment, image: UIImage){
-        userLabel.text = comment.userEmail
-        commentLabel.text = comment.text
-        commentImageView.image = image
+        _userLabel.text = comment.userEmail
+        _commentLabel.text = comment.text
+        _commentImageView.image = image
     }
 
     

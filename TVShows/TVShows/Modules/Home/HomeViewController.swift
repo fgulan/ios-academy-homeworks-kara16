@@ -11,16 +11,25 @@ import Alamofire
 import SVProgressHUD
 
 class HomeViewController: UIViewController{
-    var loginUser: LoginData?
-    private var shows: [Show] = []
-    private var isCollectionViewEnabled = true
+    //    MARK: - Public properties
     
-    @IBOutlet var collectionView: UICollectionView! {
+    var loginUser: LoginData?
+    
+    //    MARK: - Private properties
+    
+    private var _shows: [Show] = []
+    private var _isCollectionViewEnabled = true
+    
+    //    MARK: - IBOutlets
+    
+    @IBOutlet private weak var _collectionView: UICollectionView! {
         didSet {
-            collectionView.delegate = self
-            collectionView.dataSource = self
+            _collectionView.delegate = self
+            _collectionView.dataSource = self
         }
     }
+    
+    //    MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,26 +53,7 @@ class HomeViewController: UIViewController{
         super.viewWillAppear(true)
     }
     
-    @objc private func _logoutActionHandler() {
-        let domain = Bundle.main.bundleIdentifier!
-        
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
-        
-        goToLoginScreen()
-    }
-    
-    @objc private func _changeView() {
-        if isCollectionViewEnabled{
-            navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "ic-gridview")
-            isCollectionViewEnabled = false
-        }else{
-            navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "ic-listview")
-            isCollectionViewEnabled = true
-        }
-        
-        collectionView.reloadData()
-    }
+    //    MARK: - Private methods
     
     private func goToLoginScreen(){
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -93,20 +83,45 @@ class HomeViewController: UIViewController{
                 
                 switch response.result {
                 case .success(let shows):
-                    self?.shows = shows
-                    self?.collectionView.reloadData()
+                    self?._shows = shows
+                    self?._collectionView.reloadData()
                 case .failure:
                     print("Fail")
                 }
         }
     }
+    
+    //    MARK: - Private methods (objc)
+    
+    @objc private func _logoutActionHandler() {
+        let domain = Bundle.main.bundleIdentifier!
+        
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        
+        goToLoginScreen()
+    }
+    
+    @objc private func _changeView() {
+        if _isCollectionViewEnabled{
+            navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "ic-gridview")
+            _isCollectionViewEnabled = false
+        }else{
+            navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "ic-listview")
+            _isCollectionViewEnabled = true
+        }
+        
+        _collectionView.reloadData()
+    }
 }
+
+//  MARK: - Extensions
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if isCollectionViewEnabled{
+        if _isCollectionViewEnabled{
             return CGSize(width: view.frame.width / 2.2, height: view.frame.height / 3)
         }else{
             return CGSize(width: view.frame.width, height: view.frame.height / 3)
@@ -115,7 +130,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let show = shows[indexPath.row]
+        let show = _shows[indexPath.row]
         
         jumpToShowDetails(show: show)
         
@@ -145,14 +160,14 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shows.count
+        return _shows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        let show = shows[indexPath.row]
+        let show = _shows[indexPath.row]
         
-        if isCollectionViewEnabled{
+        if _isCollectionViewEnabled{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell",
                                                      for: indexPath) as! CollectionViewCell
             cell.configureWith(show: show)

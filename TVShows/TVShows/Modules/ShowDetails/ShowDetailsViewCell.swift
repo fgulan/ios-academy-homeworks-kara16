@@ -9,13 +9,16 @@
 import UIKit
 
 class ShowDetailsViewCell: UITableViewCell {
+    //    MARK: - Private properties
     
-    @IBOutlet weak var episodeTitleLabel: UILabel!
-    @IBOutlet weak var episodeNumberLabel: UILabel!
+    @IBOutlet private weak var _episodeTitleLabel: UILabel!
+    @IBOutlet private weak var _episodeNumberLabel: UILabel!
+    
+    //    MARK: - Public methods
     
     func configureWith(episode: Episode){
-        episodeNumberLabel.text = "S" + episode.season + " " + "Ep" + episode.episodeNumber
-        episodeTitleLabel.text = episode.title
+        _episodeNumberLabel.text = "S" + episode.season + " " + "Ep" + episode.episodeNumber
+        _episodeTitleLabel.text = episode.title
     }
     
 }
