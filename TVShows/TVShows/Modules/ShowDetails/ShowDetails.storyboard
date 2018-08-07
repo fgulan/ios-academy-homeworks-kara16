@@ -78,6 +78,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R9t-aE-uyl">
                                 <rect key="frame" x="0.0" y="535.33333333333337" width="414" height="200.66666666666663"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShowDetailsViewCell" id="6KW-Yb-MPD" customClass="ShowDetailsViewCell" customModule="TVShows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
@@ -89,7 +90,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Io-zs-uMg">
                                                     <rect key="frame" x="20" y="11" width="82.666666666666671" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-q4-PeM">
@@ -98,24 +99,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-ar-Zfr">
-                                                    <rect key="frame" x="372" y="0.0" width="42" height="43.666666666666664"/>
-                                                    <state key="normal" image="ic-navigation-chevron-right-medium"/>
-                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-navigation-chevron-right-medium" translatesAutoresizingMaskIntoConstraints="NO" id="UPc-AI-83t">
+                                                    <rect key="frame" x="372" y="0.0" width="42" height="44"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="UPc-AI-83t" secondAttribute="bottom" id="0Qf-96-CM3"/>
+                                                <constraint firstAttribute="trailing" secondItem="UPc-AI-83t" secondAttribute="trailing" id="1Z4-zm-WWl"/>
                                                 <constraint firstItem="2Io-zs-uMg" firstAttribute="top" secondItem="0DO-gK-B87" secondAttribute="topMargin" id="4zd-gd-bfp"/>
                                                 <constraint firstItem="RRs-q4-PeM" firstAttribute="top" secondItem="0DO-gK-B87" secondAttribute="topMargin" id="6A5-sd-8R9"/>
                                                 <constraint firstItem="RRs-q4-PeM" firstAttribute="bottom" secondItem="0DO-gK-B87" secondAttribute="bottomMargin" id="9TJ-VR-Ryu"/>
-                                                <constraint firstAttribute="trailing" secondItem="UuJ-ar-Zfr" secondAttribute="trailing" id="9UX-OR-HOP"/>
                                                 <constraint firstItem="RRs-q4-PeM" firstAttribute="width" secondItem="0DO-gK-B87" secondAttribute="width" multiplier="0.65" id="NKI-Yf-l4u"/>
                                                 <constraint firstItem="RRs-q4-PeM" firstAttribute="leading" secondItem="2Io-zs-uMg" secondAttribute="trailing" id="Olh-Lr-epf"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="2Io-zs-uMg" secondAttribute="bottom" id="Vmh-gl-Q0d"/>
+                                                <constraint firstItem="UPc-AI-83t" firstAttribute="leading" secondItem="RRs-q4-PeM" secondAttribute="trailing" id="ZKm-SK-C0e"/>
                                                 <constraint firstItem="2Io-zs-uMg" firstAttribute="leading" secondItem="0DO-gK-B87" secondAttribute="leadingMargin" id="gcQ-wq-aOW"/>
-                                                <constraint firstItem="UuJ-ar-Zfr" firstAttribute="top" secondItem="0DO-gK-B87" secondAttribute="top" id="hOg-fw-U1i"/>
-                                                <constraint firstAttribute="bottom" secondItem="UuJ-ar-Zfr" secondAttribute="bottom" id="jVQ-F7-APT"/>
                                                 <constraint firstItem="2Io-zs-uMg" firstAttribute="width" secondItem="0DO-gK-B87" secondAttribute="width" multiplier="0.2" id="qjl-nU-PVs"/>
-                                                <constraint firstItem="UuJ-ar-Zfr" firstAttribute="leading" secondItem="RRs-q4-PeM" secondAttribute="trailing" id="qul-ak-eDC"/>
+                                                <constraint firstItem="UPc-AI-83t" firstAttribute="top" secondItem="0DO-gK-B87" secondAttribute="top" id="vjs-bo-U9e"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

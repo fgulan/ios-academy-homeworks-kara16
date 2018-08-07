@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aiU-m7-HLg">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,77 +16,85 @@
             <objects>
                 <viewController storyboardIdentifier="AddEpisodeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aiU-m7-HLg" customClass="AddEpisodeViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="91N-st-2et">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7a-Hl-dMb" userLabel="PhotoView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="226.5"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="192"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7n-2a-pPv">
-                                        <rect key="frame" x="169.5" y="95" width="35" height="35"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="b7n-2a-pPv">
+                                        <rect key="frame" x="75" y="51" width="170" height="90"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="642-Yn-e7c"/>
-                                            <constraint firstAttribute="height" constant="35" id="LiO-py-yNa"/>
+                                            <constraint firstAttribute="width" constant="170" id="aS3-UI-eHc"/>
+                                            <constraint firstAttribute="height" constant="90" id="mRC-3o-MAG"/>
                                         </constraints>
-                                        <state key="normal" image="ic-camera"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="66" maxX="18" maxY="23"/>
+                                        <inset key="imageEdgeInsets" minX="73" minY="0.0" maxX="0.0" maxY="23"/>
+                                        <state key="normal" title="Upload photo" image="ic-camera">
+                                            <color key="titleColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addEpisodeImage:" destination="aiU-m7-HLg" eventType="touchUpInside" id="Oth-tF-0de"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="b7n-2a-pPv" firstAttribute="centerY" secondItem="u7a-Hl-dMb" secondAttribute="centerY" id="RUc-Cc-Rwc"/>
-                                    <constraint firstItem="b7n-2a-pPv" firstAttribute="centerX" secondItem="u7a-Hl-dMb" secondAttribute="centerX" id="lPz-rE-JEN"/>
+                                    <constraint firstItem="b7n-2a-pPv" firstAttribute="centerX" secondItem="u7a-Hl-dMb" secondAttribute="centerX" id="9Ep-eU-JDD"/>
+                                    <constraint firstItem="b7n-2a-pPv" firstAttribute="centerY" secondItem="u7a-Hl-dMb" secondAttribute="centerY" id="GNT-MD-Qyt"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9F9-z5-hGA" userLabel="PropertyView">
-                                <rect key="frame" x="0.0" y="246.5" width="375" height="420.5"/>
+                                <rect key="frame" x="0.0" y="212" width="320" height="356"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qrN-e3-bed">
-                                        <rect key="frame" x="10" y="0.0" width="355" height="64.5"/>
+                                        <rect key="frame" x="10" y="0.0" width="300" height="54.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vh3-GX-FeI">
-                                        <rect key="frame" x="5" y="64.5" width="365" height="1"/>
+                                        <rect key="frame" x="5" y="54.5" width="310" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="wM9-ZW-RKo"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Season n." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sxm-3p-a4X">
-                                        <rect key="frame" x="10" y="67.5" width="355" height="65"/>
+                                        <rect key="frame" x="10" y="57.5" width="300" height="55"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uCc-s1-kK9">
-                                        <rect key="frame" x="5" y="132.5" width="365" height="1"/>
+                                        <rect key="frame" x="5" y="112.5" width="310" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="l7r-aR-EXb"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode n." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="haf-wO-xq9">
-                                        <rect key="frame" x="10" y="135.5" width="355" height="64.5"/>
+                                        <rect key="frame" x="10" y="115.5" width="300" height="54.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loO-Fv-hGy">
-                                        <rect key="frame" x="5" y="200" width="365" height="1"/>
+                                        <rect key="frame" x="5" y="170" width="310" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="zHj-f9-zJd"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LcH-JE-hwH">
-                                        <rect key="frame" x="10" y="203" width="355" height="65"/>
+                                        <rect key="frame" x="10" y="173" width="300" height="55"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5UX-Ci-46W">
-                                        <rect key="frame" x="5" y="268" width="365" height="1"/>
+                                        <rect key="frame" x="5" y="228" width="310" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="vKY-zG-gA1"/>
@@ -135,6 +143,7 @@
                             <constraint firstItem="xab-Hl-abz" firstAttribute="bottom" secondItem="9F9-z5-hGA" secondAttribute="bottom" id="Tgg-lx-v3H"/>
                             <constraint firstItem="LcH-JE-hwH" firstAttribute="height" secondItem="xab-Hl-abz" secondAttribute="height" multiplier="0.1" id="ieR-IS-Fj7"/>
                             <constraint firstItem="Sxm-3p-a4X" firstAttribute="height" secondItem="xab-Hl-abz" secondAttribute="height" multiplier="0.1" id="pHy-x4-7TQ"/>
+                            <constraint firstItem="qrN-e3-bed" firstAttribute="top" secondItem="u7a-Hl-dMb" secondAttribute="bottom" id="u5l-ge-B5w"/>
                             <constraint firstItem="u7a-Hl-dMb" firstAttribute="height" secondItem="xab-Hl-abz" secondAttribute="height" multiplier="0.35" id="yj5-7a-PUK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xab-Hl-abz"/>
@@ -148,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbe-AJ-vAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="95"/>
+            <point key="canvasLocation" x="165" y="94.014084507042256"/>
         </scene>
     </scenes>
     <resources>

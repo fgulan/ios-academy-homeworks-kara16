@@ -14,6 +14,9 @@ class ShowDetailsViewController: UIViewController {
     var token: String?
     var showId: String?
     
+    private let refreshControl = UIRefreshControl()
+    private var isRefreshing = false
+    
     private var episodes: [Episode] = []
     
     @IBOutlet weak var coverImageView: UIImageView!
@@ -25,7 +28,17 @@ class ShowDetailsViewController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.refreshControl = refreshControl
+            
+            refreshControl.addTarget(self, action: #selector(refreshEpisodes), for: .valueChanged)
+            refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+            refreshControl.attributedTitle = NSAttributedString(string: "Refreshing episodes...")
         }
+    }
+    
+    @objc func refreshEpisodes(){
+        isRefreshing = true
+        getShowEpisodes()
     }
     
     override func viewDidLoad() {
@@ -37,7 +50,7 @@ class ShowDetailsViewController: UIViewController {
     }
     
     private func getCoverImage(imageUrl: String){
-        let url = URL(string: "https://api.infinum.academy" + imageUrl)
+        let url = URL(string: Constants.URL.baseDomainUrl + imageUrl)
         coverImageView.kf.setImage(with: url)
     }
     
@@ -66,7 +79,7 @@ class ShowDetailsViewController: UIViewController {
         SVProgressHUD.show()
         
         Alamofire
-            .request("https://api.infinum.academy/api/shows/" + showId!,
+            .request(Constants.URL.baseUrl + "/shows/" + showId!,
                      method: .get,
                      encoding: JSONEncoding.default,
                      headers: headers)
@@ -94,7 +107,7 @@ class ShowDetailsViewController: UIViewController {
         SVProgressHUD.show()
         
         Alamofire
-            .request("https://api.infinum.academy/api/shows/" + showId! + "/episodes",
+            .request(Constants.URL.baseUrl + "/shows/" + showId! + "/episodes",
                      method: .get,
                      //                     parameters: parameter,
                 encoding: JSONEncoding.default,
@@ -110,6 +123,11 @@ class ShowDetailsViewController: UIViewController {
                     self?.episodes = episodes
                     self?.tableView.reloadData()
                     self?.episodesNumberLabel.text = "Episodes " + String(episodes.count)
+                    
+                    if self!.isRefreshing {
+                        self?.refreshControl.endRefreshing()
+                        self?.isRefreshing = false
+                    }
                 case .failure(let error):
                     print(error)
                 }
@@ -118,6 +136,27 @@ class ShowDetailsViewController: UIViewController {
 }
 
 extension ShowDetailsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episode = episodes[indexPath.row]
+
+        presentEpisodeDetails(episode: episode)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    private func presentEpisodeDetails(episode: Episode){
+        let storyboard = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        let episodeDetailsViewController = storyboard.instantiateViewController(
+            withIdentifier: "EpisodeDetailsViewController"
+            ) as! EpisodeDetailsViewController
+        
+        episodeDetailsViewController.episode = episode
+        episodeDetailsViewController.token = self.token
+        
+        let navigationController = UINavigationController(rootViewController:
+           episodeDetailsViewController)
+        present(navigationController, animated: true, completion: nil)
+    }
 }
 
 extension ShowDetailsViewController: UITableViewDataSource {
@@ -143,7 +182,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
     }
 }
 
-extension ShowDetailsViewController: ShouldReload {
+extension ShowDetailsViewController: AddNewEpisodeDelegate {
     func shouldReloadEpisodes(episode: Episode) {
         episodes.append(episode)
         episodesNumberLabel.text = "Episodes " + String(episodes.count)
